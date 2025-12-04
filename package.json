@@ -1,0 +1,86 @@
+{
+  "name": "quake-coding-arena-enhanced",
+  "version": "2.0.0",
+  "description": "🎯 Premium MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
+  "main": "index.js",
+  "bin": {
+    "quake-arena-mcp": "index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "node test-mcp-server.js",
+    "smithery:dev": "smithery dev index.js",
+    "smithery:build": "smithery build index.js",
+    "smithery:test": "node test-mcp-server.js"
+  },
+  "keywords": [
+    "quake",
+    "coding",
+    "arena",
+    "achievement",
+    "sounds",
+    "claude-desktop",
+    "mcp",
+    "gamification",
+    "voice",
+    "dual-voice",
+    "announcer",
+    "productivity",
+    "motivation",
+    "cursor",
+    "smithery"
+  ],
+  "author": {
+    "name": "Quake Coding Arena Team",
+    "email": "team@quakecodingarena.com",
+    "url": "https://quakecodingarena.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced.git"
+  },
+  "bugs": {
+    "url": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@smithery/cli": "^1.6.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "mcp": {
+    "server": {
+      "command": "node",
+      "args": ["index.js"],
+      "env": {}
+    },
+    "capabilities": {
+      "tools": true,
+      "resources": false,
+      "prompts": false
+    }
+  },
+  "smithery": {
+    "displayName": "Enhanced Quake Coding Arena",
+    "category": "development",
+    "tags": ["gamification", "audio", "achievements", "motivation", "productivity"],
+    "platforms": ["darwin", "linux", "windows"],
+    "requirements": {
+      "audio": true,
+      "filesystem": true
+    }
+  },
+  "files": [
+    "index.js",
+    "sounds/",
+    "README.md",
+    "smithery.yaml",
+    "test-mcp-server.js"
+  ]
+}
