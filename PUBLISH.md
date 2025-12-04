@@ -1,8 +1,10 @@
 # 🚀 Publishing Enhanced Quake Coding Arena to Smithery
 
+![Quake Coding Arena Logo](logo.png)
+
 ## 📋 **Publishing Status: READY FOR SUBMISSION** 🎯
 
-Your Enhanced Quake Coding Arena MCP server is fully prepared for Smithery publication!
+Your Enhanced Quake Coding Arena MCP server is fully prepared for Smithery publication with professional branding and complete documentation!
 
 ---
 

@@ -1,8 +1,10 @@
 # 🎯 Enhanced Quake Coding Arena - MCP Server
 
+![Quake Coding Arena Logo](logo.png)
+
 **DOMINATING! EXCELLENT! GODLIKE! UNSTOPPABLE!** 🎯🔥
 
-> **Premium MCP Server for gamifying your development environment with authentic Quake 3 Arena sounds**
+> **Premium MCP Server for gamifying your development environment with authentic Quake 3 Arena sounds and dual voice announcers**
 
 ## 🚀 **Features**
 

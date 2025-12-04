@@ -1,5 +1,7 @@
 # 🎯 Enhanced Quake Coding Arena - Compact Guide
 
+![Quake Coding Arena Logo](logo.png)
+
 **11 authentic Quake sounds + Authentic Male/Female voice packs (WAV/MP3) for Claude Desktop & Cursor IDE** ✨
 
 ---
