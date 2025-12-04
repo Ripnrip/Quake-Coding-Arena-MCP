@@ -1,9 +1,14 @@
 export default {
   esbuild: {
-    format: "esm",
-    target: "node18",
+    entryPoints: ["src/index.ts"],
+    bundle: true,
     platform: "node",
+    target: "node18",
+    format: "cjs",
+    outfile: ".smithery/index.cjs",
     external: [
+      "@modelcontextprotocol/sdk",
+      "zod",
       "fs",
       "path",
       "child_process",
@@ -12,5 +17,6 @@ export default {
     ],
     minify: false,
     sourcemap: true,
+    allowOverwrite: true,
   },
 };

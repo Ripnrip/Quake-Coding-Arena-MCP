@@ -3,6 +3,7 @@
   "version": "2.1.1",
   "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
   "type": "module",
+  "main": ".smithery/index.cjs",
   "module": "src/index.ts",
   "bin": {
     "quake-arena-mcp": "src/index.ts"

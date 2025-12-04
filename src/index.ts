@@ -17,8 +17,8 @@ import * as fs from "fs";
 import * as path from "path";
 import { spawn } from "child_process";
 
-// Get current directory - handle both CommonJS and ESM
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+// Get current directory - compatible with both CJS and ESM
+const __dirname = process.cwd();
 
 // 🎯 Configuration Schema for Smithery
 export const configSchema = z.object({
