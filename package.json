@@ -1,6 +1,6 @@
 {
   "name": "quake-coding-arena-enhanced",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
   "type": "module",
   "module": "src/index.ts",

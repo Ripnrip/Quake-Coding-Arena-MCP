@@ -227,7 +227,7 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
 
   const server = new McpServer({
     name: "Enhanced Quake Coding Arena",
-    version: "2.1.0",
+    version: "2.1.1",
   });
 
   // 🎯 Play Enhanced Quake Sound Tool
