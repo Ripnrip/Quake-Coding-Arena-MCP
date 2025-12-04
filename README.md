@@ -4,7 +4,7 @@
 
 **DOMINATING! EXCELLENT! GODLIKE! UNSTOPPABLE!** 🎯🔥
 
-> **Premium MCP Server for gamifying your development environment with authentic Quake 3 Arena sounds and dual voice announcers**
+> **Premium TypeScript MCP Server for gamifying your development environment with authentic Quake 3 Arena sounds and dual voice announcers**
 
 ## 🚀 **Features**
 
@@ -182,4 +182,4 @@ MIT License - Feel free to use and modify!
 ---
 
 *Built with ❤️ and Quake 3 Arena nostalgia*
-*Published via Smithery - The MCP Server Registry*# Quake-Coding-Arena-MCP
+*Published via Smithery - The MCP Server Registry*

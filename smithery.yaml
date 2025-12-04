@@ -1,15 +1,18 @@
 # Smithery Configuration for Enhanced Quake Coding Arena MCP Server
 
+# TypeScript Runtime Configuration
+runtime: "typescript"
+
 name: quake-coding-arena-enhanced
 displayName: Enhanced Quake Coding Arena
-description: 🎯 Premium MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment
+description: 🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment
 
 # Version information
-version: 2.0.0
+version: 2.1.0
 author: Quake Coding Arena Team
 license: MIT
-homepage: https://github.com/quake-coding-arena/quake-coding-arena-enhanced
-repository: https://github.com/quake-coding-arena/quake-coding-arena-enhanced
+homepage: https://github.com/Ripnrip/Quake-Coding-Arena-MCP
+repository: https://github.com/Ripnrip/Quake-Coding-Arena-MCP
 keywords:
   - quake
   - coding
@@ -22,9 +25,11 @@ keywords:
   - cursor
   - voice
   - dual-voice
+  - typescript
+  - smithery
 
-# Main server entry point
-main: index.js
+# Main server entry point - points to TypeScript source
+main: src/index.ts
 
 # MCP server configuration
 mcp:

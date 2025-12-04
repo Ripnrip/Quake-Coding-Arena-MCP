@@ -1,17 +1,19 @@
 {
   "name": "quake-coding-arena-enhanced",
-  "version": "2.0.0",
-  "description": "🎯 Premium MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
-  "main": "index.js",
+  "version": "2.1.0",
+  "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
+  "type": "module",
+  "module": "src/index.ts",
   "bin": {
-    "quake-arena-mcp": "index.js"
+    "quake-arena-mcp": "src/index.ts"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js",
-    "test": "node test-mcp-server.js",
-    "smithery:dev": "smithery dev index.js",
-    "smithery:build": "smithery build index.js",
+    "build": "npx smithery build",
+    "dev": "npx smithery dev",
+    "start": "npx smithery dev",
+    "test": "npx smithery dev",
+    "smithery:dev": "npx smithery dev",
+    "smithery:build": "npx smithery build",
     "smithery:test": "node test-mcp-server.js"
   },
   "keywords": [
@@ -29,7 +31,8 @@
     "productivity",
     "motivation",
     "cursor",
-    "smithery"
+    "smithery",
+    "typescript"
   ],
   "author": {
     "name": "Quake Coding Arena Team",
@@ -37,27 +40,30 @@
     "url": "https://quakecodingarena.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced#readme",
+  "homepage": "https://github.com/Ripnrip/Quake-Coding-Arena-MCP#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced.git"
+    "url": "https://github.com/Ripnrip/Quake-Coding-Arena-MCP.git"
   },
   "bugs": {
-    "url": "https://github.com/quake-coding-arena/quake-coding-arena-enhanced/issues"
+    "url": "https://github.com/Ripnrip/Quake-Coding-Arena-MCP/issues"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0"
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.25.46"
   },
   "devDependencies": {
-    "@smithery/cli": "^1.6.4"
+    "@smithery/cli": "^1.4.6",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "mcp": {
     "server": {
-      "command": "node",
-      "args": ["index.js"],
+      "command": "npx",
+      "args": ["@smithery/quake-coding-arena-enhanced"],
       "env": {}
     },
     "capabilities": {
@@ -69,7 +75,7 @@
   "smithery": {
     "displayName": "Enhanced Quake Coding Arena",
     "category": "development",
-    "tags": ["gamification", "audio", "achievements", "motivation", "productivity"],
+    "tags": ["gamification", "audio", "achievements", "motivation", "productivity", "typescript"],
     "platforms": ["darwin", "linux", "windows"],
     "requirements": {
       "audio": true,
@@ -77,10 +83,11 @@
     }
   },
   "files": [
-    "index.js",
+    "src/",
     "sounds/",
     "README.md",
     "smithery.yaml",
-    "test-mcp-server.js"
+    "tsconfig.json",
+    "package.json"
   ]
 }
