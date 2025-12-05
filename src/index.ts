@@ -485,5 +485,5 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     }
   );
 
-  return server;
+  return server.server; // Must return the underlying Server, not McpServer wrapper
 }
