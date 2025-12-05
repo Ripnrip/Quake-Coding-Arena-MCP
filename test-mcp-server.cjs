@@ -12,8 +12,10 @@ const path = require('path');
 console.log('🎯 Testing Enhanced Quake Arena MCP Server...\n');
 
 // Test server startup
-const serverPath = path.join(__dirname, 'index.js');
-const server = spawn('node', [serverPath], {
+// Test server startup
+const serverPath = path.join(__dirname, 'run-server.ts');
+const tsxPath = path.join(__dirname, 'node_modules', '.bin', 'tsx');
+const server = spawn(tsxPath, [serverPath], {
   stdio: ['pipe', 'pipe', 'pipe']
 });
 
@@ -93,4 +95,4 @@ setTimeout(() => {
       process.exit(0);
     }, 1000);
   }, 500);
-}, 500);
+}, 3000);

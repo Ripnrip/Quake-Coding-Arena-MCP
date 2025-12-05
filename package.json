@@ -56,6 +56,7 @@
   "devDependencies": {
     "@smithery/cli": "^1.4.6",
     "@types/node": "^20.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.0.0"
   },
   "engines": {
@@ -64,7 +65,9 @@
   "mcp": {
     "server": {
       "command": "npx",
-      "args": ["@smithery/quake-coding-arena-enhanced"],
+      "args": [
+        "@smithery/quake-coding-arena-enhanced"
+      ],
       "env": {}
     },
     "capabilities": {
@@ -76,8 +79,19 @@
   "smithery": {
     "displayName": "Enhanced Quake Coding Arena",
     "category": "development",
-    "tags": ["gamification", "audio", "achievements", "motivation", "productivity", "typescript"],
-    "platforms": ["darwin", "linux", "windows"],
+    "tags": [
+      "gamification",
+      "audio",
+      "achievements",
+      "motivation",
+      "productivity",
+      "typescript"
+    ],
+    "platforms": [
+      "darwin",
+      "linux",
+      "windows"
+    ],
     "requirements": {
       "audio": true,
       "filesystem": true

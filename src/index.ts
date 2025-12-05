@@ -231,27 +231,30 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   });
 
   // 🎯 Play Enhanced Quake Sound Tool
-  server.tool(
+  server.registerTool(
     "play_enhanced_quake_sound",
     {
-      achievement: {
-        type: "string",
-        description: "🏆 Enhanced achievement name",
-        enum: Object.keys(ENHANCED_ACHIEVEMENTS),
-      },
-      volume: {
-        type: "number",
-        description: "🔊 Enhanced volume level (0-100)",
-        minimum: 0,
-        maximum: 100,
-        default: enhancedStats.volume,
-      },
-      voiceGender: {
-        type: "string",
-        description: "🎤 Voice gender selection",
-        enum: ["male", "female"],
-        default: null,
-      },
+      description: "🏆 Plays a high-quality enhanced Quake achievement sound with voice pack support",
+      inputSchema: {
+        achievement: {
+          type: "string",
+          description: "🏆 Enhanced achievement name",
+          enum: Object.keys(ENHANCED_ACHIEVEMENTS),
+        },
+        volume: {
+          type: "number",
+          description: "🔊 Enhanced volume level (0-100)",
+          minimum: 0,
+          maximum: 100,
+          default: enhancedStats.volume,
+        },
+        voiceGender: {
+          type: "string",
+          description: "🎤 Voice gender selection",
+          enum: ["male", "female"],
+          default: null,
+        },
+      }
     },
     async ({ achievement, volume, voiceGender }) => {
       try {
@@ -301,9 +304,12 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 📊 Get Enhanced Achievement Stats
-  server.tool(
+  server.registerTool(
     "get_enhanced_achievement_stats",
-    {},
+    {
+      description: "📊 Retrieve current session statistics and achievement progress",
+      inputSchema: {}
+    },
     async () => {
       const sessionMinutes = Math.floor((Date.now() - new Date(enhancedStats.sessionStart).getTime()) / 60000);
 
@@ -322,22 +328,25 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 🎲 Random Enhanced Achievement
-  server.tool(
+  server.registerTool(
     "random_enhanced_achievement",
     {
-      category: {
-        type: "string",
-        description: "🎯 Filter by category",
-        enum: ["streak", "quality", "multi", "game", "team"],
-        default: null,
-      },
-      volume: {
-        type: "number",
-        description: "🔊 Enhanced volume level (0-100)",
-        minimum: 0,
-        maximum: 100,
-        default: enhancedStats.volume,
-      },
+      description: "🎲 Play a random achievement sound from a specific category",
+      inputSchema: {
+        category: {
+          type: "string",
+          description: "🎯 Filter by category",
+          enum: ["streak", "quality", "multi", "game", "team"],
+          default: null,
+        },
+        volume: {
+          type: "number",
+          description: "🔊 Enhanced volume level (0-100)",
+          minimum: 0,
+          maximum: 100,
+          default: enhancedStats.volume,
+        },
+      }
     },
     async ({ category, volume }) => {
       const randomAchievement = EnhancedSoundOracle.getRandomAchievement(category);
@@ -361,15 +370,18 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 📋 List Enhanced Achievements
-  server.tool(
+  server.registerTool(
     "list_enhanced_achievements",
     {
-      category: {
-        type: "string",
-        description: "🎯 Filter by category",
-        enum: ["streak", "quality", "multi", "game", "team"],
-        default: null,
-      },
+      description: "📋 List all available enhanced achievements and their categories",
+      inputSchema: {
+        category: {
+          type: "string",
+          description: "🎯 Filter by category",
+          enum: ["streak", "quality", "multi", "game", "team"],
+          default: null,
+        },
+      }
     },
     async ({ category }) => {
       const achievements = category
@@ -396,15 +408,18 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 🔊 Set Enhanced Volume
-  server.tool(
+  server.registerTool(
     "set_enhanced_volume",
     {
-      volume: {
-        type: "number",
-        description: "🔊 Enhanced volume level (0-100)",
-        minimum: 0,
-        maximum: 100,
-      },
+      description: "🔊 Adjust the global soundboard volume (0-100)",
+      inputSchema: {
+        volume: {
+          type: "number",
+          description: "🔊 Enhanced volume level (0-100)",
+          minimum: 0,
+          maximum: 100,
+        },
+      }
     },
     async ({ volume }) => {
       enhancedStats.volume = volume;
@@ -420,14 +435,17 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 🎤 Set Voice Pack
-  server.tool(
+  server.registerTool(
     "set_voice_pack",
     {
-      voiceGender: {
-        type: "string",
-        description: "🎤 Voice gender selection",
-        enum: ["male", "female"],
-      },
+      description: "🎤 Switch between Male and Female announcer voice packs",
+      inputSchema: {
+        voiceGender: {
+          type: "string",
+          description: "🎤 Voice gender selection",
+          enum: ["male", "female"],
+        },
+      }
     },
     async ({ voiceGender }) => {
       enhancedStats.voicePack = voiceGender;
@@ -445,9 +463,12 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   );
 
   // 🎤 Get Voice Pack Info
-  server.tool(
+  server.registerTool(
     "get_voice_pack_info",
-    {},
+    {
+      description: "ℹ️ Get information about the currently active voice pack",
+      inputSchema: {}
+    },
     async () => {
       return {
         content: [{
