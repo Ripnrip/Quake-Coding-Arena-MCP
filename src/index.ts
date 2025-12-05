@@ -233,7 +233,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 🎯 Play Enhanced Quake Sound Tool
   server.tool(
     "play_enhanced_quake_sound",
-    "Plays a specific Quake achievement sound with customizable volume and voice pack. Supports authentic male and female voices.",
     {
       achievement: {
         type: "string",
@@ -304,7 +303,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 📊 Get Enhanced Achievement Stats
   server.tool(
     "get_enhanced_achievement_stats",
-    "Retrieves detailed statistics about the current session, including total achievements, streak info, and category breakdown.",
     {},
     async () => {
       const sessionMinutes = Math.floor((Date.now() - new Date(enhancedStats.sessionStart).getTime()) / 60000);
@@ -326,7 +324,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 🎲 Random Enhanced Achievement
   server.tool(
     "random_enhanced_achievement",
-    "Plays a random achievement sound, optionally filtered by category (streak, quality, multi, game, team).",
     {
       category: {
         type: "string",
@@ -366,7 +363,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 📋 List Enhanced Achievements
   server.tool(
     "list_enhanced_achievements",
-    "Lists all available achievements and their categories, thresholds, and descriptions.",
     {
       category: {
         type: "string",
@@ -402,7 +398,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 🔊 Set Enhanced Volume
   server.tool(
     "set_enhanced_volume",
-    "Sets the global playback volume for the soundboard (0-100).",
     {
       volume: {
         type: "number",
@@ -427,7 +422,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 🎤 Set Voice Pack
   server.tool(
     "set_voice_pack",
-    "Switches the active voice pack between Male (Classic) and Female (Sexy Announcer).",
     {
       voiceGender: {
         type: "string",
@@ -453,7 +447,6 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // 🎤 Get Voice Pack Info
   server.tool(
     "get_voice_pack_info",
-    "Gets information about the currently active voice pack and available options.",
     {},
     async () => {
       return {
