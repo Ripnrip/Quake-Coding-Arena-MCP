@@ -1,5 +1,7 @@
 # 🎯 Enhanced Quake Coding Arena - MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@Ripnrip/quake-coding-arena)](https://smithery.ai/server/@Ripnrip/quake-coding-arena)
+
 ![Quake Coding Arena Logo](logo.png)
 
 **DOMINATING! EXCELLENT! GODLIKE! UNSTOPPABLE!** 🎯🔥
