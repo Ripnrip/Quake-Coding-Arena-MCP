@@ -236,24 +236,9 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     {
       description: "🏆 Plays a high-quality enhanced Quake achievement sound with voice pack support",
       inputSchema: {
-        achievement: {
-          type: "string",
-          description: "🏆 Enhanced achievement name",
-          enum: Object.keys(ENHANCED_ACHIEVEMENTS),
-        },
-        volume: {
-          type: "number",
-          description: "🔊 Enhanced volume level (0-100)",
-          minimum: 0,
-          maximum: 100,
-          default: enhancedStats.volume,
-        },
-        voiceGender: {
-          type: "string",
-          description: "🎤 Voice gender selection",
-          enum: ["male", "female"],
-          default: null,
-        },
+        achievement: z.enum(Object.keys(ENHANCED_ACHIEVEMENTS) as [string, ...string[]]).describe("🏆 Enhanced achievement name"),
+        volume: z.number().min(0).max(100).default(80).describe("🔊 Enhanced volume level (0-100)"),
+        voiceGender: z.enum(["male", "female"]).optional().describe("🎤 Voice gender selection"),
       }
     },
     async ({ achievement, volume, voiceGender }) => {
@@ -333,19 +318,8 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     {
       description: "🎲 Play a random achievement sound from a specific category",
       inputSchema: {
-        category: {
-          type: "string",
-          description: "🎯 Filter by category",
-          enum: ["streak", "quality", "multi", "game", "team"],
-          default: null,
-        },
-        volume: {
-          type: "number",
-          description: "🔊 Enhanced volume level (0-100)",
-          minimum: 0,
-          maximum: 100,
-          default: enhancedStats.volume,
-        },
+        category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
+        volume: z.number().min(0).max(100).default(80).describe("🔊 Enhanced volume level (0-100)"),
       }
     },
     async ({ category, volume }) => {
@@ -361,11 +335,26 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
         };
       }
 
-      return await server.tools.call("play_enhanced_quake_sound", {
-        achievement: randomAchievement,
-        volume,
-        voiceGender: null
-      });
+      // Play the sound directly instead of calling another tool
+      try {
+        await EnhancedSoundOracle.playAchievementSound(randomAchievement, volume || 80, null);
+        return {
+          content: [{
+            type: "text",
+            text: `🎲 Random achievement: ${randomAchievement} played!`
+          }],
+          success: true,
+          achievement: randomAchievement
+        };
+      } catch (error) {
+        return {
+          content: [{
+            type: "text",
+            text: `❌ Error playing ${randomAchievement}: ${error instanceof Error ? error.message : String(error)}`
+          }],
+          success: false
+        };
+      }
     }
   );
 
@@ -375,12 +364,7 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     {
       description: "📋 List all available enhanced achievements and their categories",
       inputSchema: {
-        category: {
-          type: "string",
-          description: "🎯 Filter by category",
-          enum: ["streak", "quality", "multi", "game", "team"],
-          default: null,
-        },
+        category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
       }
     },
     async ({ category }) => {
@@ -413,12 +397,7 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     {
       description: "🔊 Adjust the global soundboard volume (0-100)",
       inputSchema: {
-        volume: {
-          type: "number",
-          description: "🔊 Enhanced volume level (0-100)",
-          minimum: 0,
-          maximum: 100,
-        },
+        volume: z.number().min(0).max(100).describe("🔊 Enhanced volume level (0-100)"),
       }
     },
     async ({ volume }) => {
@@ -440,11 +419,7 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     {
       description: "🎤 Switch between Male and Female announcer voice packs",
       inputSchema: {
-        voiceGender: {
-          type: "string",
-          description: "🎤 Voice gender selection",
-          enum: ["male", "female"],
-        },
+        voiceGender: z.enum(["male", "female"]).describe("🎤 Voice gender selection"),
       }
     },
     async ({ voiceGender }) => {
