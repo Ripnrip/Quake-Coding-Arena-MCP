@@ -114,7 +114,7 @@ quake-coding-arena-enhanced/
 │   ├── male/            # Male announcer sounds
 │   └── female/          # Female announcer sounds
 ├── README.md            # This file
-└── test-mcp-server.js   # Test utilities
+└── test-mcp-server.cjs   # Test utilities
 ```
 
 ## 🏆 **Achievement Categories**

@@ -143,7 +143,7 @@ Choose your favorite Quake announcer voice style:
 node index.js
 
 # Or use the test script
-node test-mcp-server.js
+node test-mcp-server.cjs
 ```
 
 ### **4. Restart Your IDE**
@@ -344,7 +344,7 @@ paplay --volume=80 sounds/excellent.mp3  # Linux
 node index.js
 
 # Validate JSON-RPC communication
-node test-mcp-server.js
+node test-mcp-server.cjs
 ```
 
 **IDE Integration Problems:**

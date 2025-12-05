@@ -15,7 +15,7 @@
     "test": "npx smithery dev",
     "smithery:dev": "npx smithery dev",
     "smithery:build": "npx smithery build",
-    "smithery:test": "node test-mcp-server.js"
+    "smithery:test": "node test-mcp-server.cjs"
   },
   "keywords": [
     "quake",
@@ -72,8 +72,8 @@
     },
     "capabilities": {
       "tools": true,
-      "resources": false,
-      "prompts": false
+      "resources": true,
+      "prompts": true
     }
   },
   "smithery": {

@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
 /**
- * 🎭 The Enhanced Quake Oracle - TypeScript MCP Server Edition v2.1
+ * 🎭 The Enhanced Quake Oracle - TypeScript MCP Server Edition v2.2
  *
  * "Where coding victories become legendary achievements, and every
  * keystroke echoes through the digital arena with authentic male/female Quake voices!"
  *
- * Features: 11 achievements, voice switching (male/female), WAV/MP3 support
+ * Features: 11 achievements, voice switching (male/female), WAV/MP3 support, Resources, Prompts
  *
  * - The Enhanced Quake Arena Master of TypeScript
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import * as fs from "fs";
 import * as path from "path";
+import * as url from "url";
 import { spawn } from "child_process";
-
-// Get current directory - compatible with both CJS and ESM
-const __dirname = process.cwd();
+import { ListResourcesRequestSchema, ReadResourceRequestSchema, ListPromptsRequestSchema, GetPromptRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
 // 🎯 Configuration Schema for Smithery
 export const configSchema = z.object({
@@ -113,6 +113,30 @@ Object.values(ENHANCED_ACHIEVEMENTS).forEach(achievement => {
   }
 });
 
+// 🌟 Path Resolution Helper
+function getProjectRoot(): string {
+  // Try to find 'sounds' directory starting from CWD
+  if (fs.existsSync(path.join(process.cwd(), 'sounds'))) {
+    return process.cwd();
+  }
+
+  // Try __dirname (if CJS) or import.meta.url (if ESM/TS source)
+  // Since we compile to CJS in .smithery, we can check relative to that
+  try {
+    // If we are in .smithery/index.cjs, the root is one level up
+    const currentDir = typeof __dirname !== 'undefined' ? __dirname : path.dirname(url.fileURLToPath(import.meta.url));
+    if (fs.existsSync(path.join(currentDir, '..', 'sounds'))) {
+      return path.resolve(currentDir, '..');
+    }
+  } catch (e) {
+    // Ignore error
+  }
+
+  // Fallback to CWD
+  return process.cwd();
+}
+
+
 // 🌟 The Enhanced Cross-Platform Sound Alchemist
 class EnhancedSoundOracle {
   static async playAchievementSound(
@@ -130,10 +154,12 @@ class EnhancedSoundOracle {
     const selectedVoice = voiceGender || enhancedStats.voicePack;
     const voiceConfig = VOICE_PACKS[selectedVoice] || VOICE_PACKS.male;
 
+    const projectRoot = getProjectRoot();
+
     // 🎵 Try WAV first (for female sounds), then MP3
     const baseName = achievement.file.replace('.mp3', '');
-    const soundPathWav = path.join(__dirname, '..', voiceConfig.path, `${baseName}.wav`);
-    const soundPathMp3 = path.join(__dirname, '..', voiceConfig.path, achievement.file);
+    const soundPathWav = path.join(projectRoot, voiceConfig.path, `${baseName}.wav`);
+    const soundPathMp3 = path.join(projectRoot, voiceConfig.path, achievement.file);
 
     let soundPath: string;
     if (fs.existsSync(soundPathWav)) {
@@ -143,15 +169,15 @@ class EnhancedSoundOracle {
     } else {
       // Fallback to male voice
       const maleVoiceConfig = VOICE_PACKS.male;
-      const malePathWav = path.join(__dirname, '..', maleVoiceConfig.path, `${baseName}.wav`);
-      const malePathMp3 = path.join(__dirname, '..', maleVoiceConfig.path, achievement.file);
+      const malePathWav = path.join(projectRoot, maleVoiceConfig.path, `${baseName}.wav`);
+      const malePathMp3 = path.join(projectRoot, maleVoiceConfig.path, achievement.file);
 
       if (fs.existsSync(malePathWav)) {
         soundPath = malePathWav;
       } else if (fs.existsSync(malePathMp3)) {
         soundPath = malePathMp3;
       } else {
-        throw new Error(`❌ Sound file not found: ${baseName} (${achievement.file})`);
+        throw new Error(`❌ Sound file not found: ${baseName} (${achievement.file}) checked in ${projectRoot}`);
       }
     }
 
@@ -227,7 +253,13 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
 
   const server = new McpServer({
     name: "Enhanced Quake Coding Arena",
-    version: "2.1.1",
+    version: "2.2.0",
+  }, {
+    capabilities: {
+      tools: {},
+      resources: {},
+      prompts: {},
+    }
   });
 
   // 🎯 Play Enhanced Quake Sound Tool
@@ -460,5 +492,142 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
     }
   );
 
-  return server.server; // Must return the underlying Server, not McpServer wrapper
+  // 📚 Resources Implementation
+  server.server.setRequestHandler(ListResourcesRequestSchema, async () => {
+    const projectRoot = getProjectRoot();
+    const resources = [];
+
+    // Male sounds
+    const malePath = path.join(projectRoot, VOICE_PACKS.male.path);
+    if (fs.existsSync(malePath)) {
+      const files = fs.readdirSync(malePath).filter(f => f.endsWith('.mp3') || f.endsWith('.wav'));
+      files.forEach(file => {
+        resources.push({
+          uri: `quake://${VOICE_PACKS.male.path}/${file}`,
+          name: `Male Voice: ${file.replace(/\.(mp3|wav)/, '')}`,
+          mimeType: file.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav',
+          description: `Male announcer sound for ${file}`
+        });
+      });
+    }
+
+    // Female sounds
+    const femalePath = path.join(projectRoot, VOICE_PACKS.female.path);
+    if (fs.existsSync(femalePath)) {
+      const files = fs.readdirSync(femalePath).filter(f => f.endsWith('.mp3') || f.endsWith('.wav'));
+      files.forEach(file => {
+        resources.push({
+          uri: `quake://${VOICE_PACKS.female.path}/${file}`,
+          name: `Female Voice: ${file.replace(/\.(mp3|wav)/, '')}`,
+          mimeType: file.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav',
+          description: `Female announcer sound for ${file}`
+        });
+      });
+    }
+
+    return {
+      resources
+    };
+  });
+
+  server.server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+    const uri = request.params.uri;
+    const projectRoot = getProjectRoot();
+
+    // Parse URI quake://path/to/file
+    if (!uri.startsWith('quake://')) {
+      throw new Error('Invalid resource URI');
+    }
+
+    const relativePath = uri.replace('quake://', '');
+    const fullPath = path.join(projectRoot, relativePath);
+
+    if (!fs.existsSync(fullPath)) {
+      throw new Error(`Resource not found: ${uri}`);
+    }
+
+    const content = fs.readFileSync(fullPath);
+    const mimeType = fullPath.endsWith('.mp3') ? 'audio/mpeg' : 'audio/wav';
+
+    return {
+      contents: [{
+        uri,
+        mimeType,
+        blob: content.toString('base64')
+      }]
+    };
+  });
+
+  // 💡 Prompts Implementation
+  server.server.setRequestHandler(ListPromptsRequestSchema, async () => {
+    return {
+      prompts: [
+        {
+          name: "encourage-developer",
+          description: "Encourage the developer with a Quake sound based on recent success",
+          arguments: [
+            {
+              name: "success_level",
+              description: "Level of success (low, medium, high)",
+              required: true
+            }
+          ]
+        },
+        {
+          name: "celebrate-victory",
+          description: "Celebrate a major coding victory",
+          arguments: [
+            {
+              name: "achievement",
+              description: "Specific achievement to reference (e.g. GODLIKE)",
+              required: false
+            }
+          ]
+        }
+      ]
+    };
+  });
+
+  server.server.setRequestHandler(GetPromptRequestSchema, async (request) => {
+    const promptName = request.params.name;
+    const args = request.params.arguments || {};
+
+    if (promptName === "encourage-developer") {
+      const level = args.success_level;
+      let sound = "IMPRESSIVE";
+      if (level === "high") sound = "GODLIKE";
+      if (level === "low") sound = "EXCELLENT";
+
+      return {
+        messages: [
+          {
+            role: "user",
+            content: {
+              type: "text",
+              text: `The developer just achieved a ${level} success. Please acknowledge this and then immediately call the play_enhanced_quake_sound tool with the '${sound}' achievement.`
+            }
+          }
+        ]
+      };
+    }
+
+    if (promptName === "celebrate-victory") {
+      const achievement = args.achievement || "PERFECT";
+      return {
+        messages: [
+          {
+            role: "user",
+            content: {
+              type: "text",
+              text: `We have a victory! Please celebrate by calling the play_enhanced_quake_sound tool with the '${achievement}' achievement and add an encouraging comment.`
+            }
+          }
+        ]
+      };
+    }
+
+    throw new Error("Prompt not found");
+  });
+
+  return server.server; // Must return the underlying Server
 }
