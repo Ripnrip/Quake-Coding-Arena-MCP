@@ -1,7 +1,7 @@
 {
   "name": "quake-coding-arena-enhanced",
   "version": "2.1.1",
-  "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment",
+  "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment.\n\n🎮 Features:\n• 11 Epic Achievements: RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE, EXCELLENT, PERFECT, IMPRESSIVE, WICKED SICK, FIRST BLOOD, HUMILIATION, PREPARE TO FIGHT\n• Dual Voice Packs: Male & Female announcers\n• 7 Tools: play_enhanced_quake_sound, random_enhanced_achievement, list_enhanced_achievements, get_enhanced_achievement_stats, set_enhanced_volume, set_voice_pack, get_voice_pack_info\n• Resources: Access to all sound files (MP3/WAV)\n• Prompts: encourage-developer, celebrate-victory",
   "type": "module",
   "main": ".smithery/index.cjs",
   "module": "src/index.ts",
