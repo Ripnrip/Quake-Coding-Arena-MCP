@@ -15,7 +15,6 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import * as fs from "fs";
 import * as path from "path";
-import * as url from "url";
 import { spawn } from "child_process";
 import { ListResourcesRequestSchema, ReadResourceRequestSchema, ListPromptsRequestSchema, GetPromptRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
@@ -119,13 +118,11 @@ function getProjectRoot(): string {
     return process.cwd();
   }
 
-  // Try __dirname (if CJS) or import.meta.url (if ESM/TS source)
-  // Since we compile to CJS in .smithery, we can check relative to that
+  // Try __dirname (standard CJS)
+  // If we are in .smithery/index.cjs, the root is one level up
   try {
-    // If we are in .smithery/index.cjs, the root is one level up
-    const currentDir = typeof __dirname !== 'undefined' ? __dirname : path.dirname(url.fileURLToPath(import.meta.url));
-    if (fs.existsSync(path.join(currentDir, '..', 'sounds'))) {
-      return path.resolve(currentDir, '..');
+    if (fs.existsSync(path.join(__dirname, '..', 'sounds'))) {
+      return path.resolve(__dirname, '..');
     }
   } catch (e) {
     // Ignore error
