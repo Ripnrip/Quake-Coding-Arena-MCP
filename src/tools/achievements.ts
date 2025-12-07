@@ -13,6 +13,13 @@ export function registerAchievementTools(server: McpServer) {
                 achievement: z.enum(Object.keys(ENHANCED_ACHIEVEMENTS) as [string, ...string[]]).describe("🏆 Enhanced achievement name"),
                 volume: z.number().min(0).max(100).default(80).describe("🔊 Enhanced volume level (0-100)"),
                 voiceGender: z.enum(["male", "female"]).optional().describe("🎤 Voice gender selection"),
+            },
+            annotations: {
+                title: "🏆 Play Achievement Sound",
+                readOnlyHint: false,
+                destructiveHint: false,
+                idempotentHint: false,
+                openWorldHint: true
             }
         },
         async ({ achievement, volume, voiceGender }) => {
@@ -114,6 +121,13 @@ export function registerAchievementTools(server: McpServer) {
             description: "📋 List all available enhanced achievements and their categories",
             inputSchema: {
                 category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
+            },
+            annotations: {
+                title: "📋 List Achievements",
+                readOnlyHint: true,
+                destructiveHint: false,
+                idempotentHint: true,
+                openWorldHint: false
             }
         },
         async ({ category }) => {

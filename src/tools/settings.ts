@@ -10,6 +10,13 @@ export function registerSettingsTools(server: McpServer) {
             description: "🔊 Adjust the global soundboard volume (0-100)",
             inputSchema: {
                 volume: z.number().min(0).max(100).describe("🔊 Enhanced volume level (0-100)"),
+            },
+            annotations: {
+                title: "🔊 Set Volume",
+                readOnlyHint: false,
+                destructiveHint: false,
+                idempotentHint: false,
+                openWorldHint: false
             }
         },
         async ({ volume }) => {
@@ -32,6 +39,13 @@ export function registerSettingsTools(server: McpServer) {
             description: "🎤 Switch between Male and Female announcer voice packs",
             inputSchema: {
                 voiceGender: z.enum(["male", "female"]).describe("🎤 Voice gender selection"),
+            },
+            annotations: {
+                title: "🎤 Set Voice Pack",
+                readOnlyHint: false,
+                destructiveHint: false,
+                idempotentHint: false,
+                openWorldHint: false
             }
         },
         async ({ voiceGender }) => {
@@ -54,7 +68,10 @@ export function registerSettingsTools(server: McpServer) {
         "get_voice_pack_info",
         {
             description: "ℹ️ Get information about the currently active voice pack",
-            inputSchema: {}
+            inputSchema: {
+                // No parameters required for this tool
+                _dummy: z.string().optional().describe("No parameters required")
+            }
         },
         async () => {
             return {

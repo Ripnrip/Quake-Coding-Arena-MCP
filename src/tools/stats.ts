@@ -7,7 +7,10 @@ export function registerStatsTools(server: McpServer) {
         "get_enhanced_achievement_stats",
         {
             description: "📊 Retrieve current session statistics and achievement progress",
-            inputSchema: {}
+            inputSchema: {
+                // No parameters required for this tool
+                _dummy: z.string().optional().describe("No parameters required")
+            }
         },
         async () => {
             const sessionMinutes = Math.floor((Date.now() - new Date(enhancedStats.sessionStart).getTime()) / 60000);
