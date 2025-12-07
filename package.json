@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.3",
+    "@smithery/sdk": "^2.1.0",
     "zod": "^3.25.0"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { createStatelessServer } from "@smithery/sdk/server/stateless.js";
 import { z } from "zod";
 import { enhancedStats } from "./utils/types.js";
 import { registerAchievementTools } from "./tools/achievements.js";
@@ -28,7 +29,7 @@ export const configSchema = z.object({
 }).optional();
 
 // 🎭 Create Server Function - Required by Smithery
-export default function createServer({ config }: { config?: z.infer<typeof configSchema> }) {
+function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) {
   // Apply configuration if provided
   if (config) {
     enhancedStats.volume = config.volume;
@@ -58,5 +59,8 @@ export default function createServer({ config }: { config?: z.infer<typeof confi
   // Register prompts
   registerEncouragementPrompts(server.server);
 
-  return server.server; // Must return the underlying Server
+  return server.server; // Return the underlying Server
 }
+
+// Export for Smithery SDK
+export default createStatelessServer(createMcpServer, { configSchema });

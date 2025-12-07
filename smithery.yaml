@@ -2,3 +2,10 @@
 
 # TypeScript Runtime Configuration
 runtime: "typescript"
+
+# Server metadata for Smithery registry
+name: "Enhanced Quake Coding Arena"
+description: "Gamified coding with Quake 3 Arena voice packs & 11 achievements"
+
+# Server entry point for the MCP server
+entryPoint: "src/index.ts"
