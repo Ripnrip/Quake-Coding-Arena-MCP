@@ -17,7 +17,7 @@ export function registerAchievementTools(server: McpServer) {
         },
         async ({ achievement, volume, voiceGender }) => {
             try {
-                await EnhancedSoundOracle.playAchievementSound(achievement, volume, voiceGender, enhancedStats.voicePack);
+                const soundUri = await EnhancedSoundOracle.playAchievementSound(achievement, volume, voiceGender, enhancedStats.voicePack);
 
                 // Update statistics
                 enhancedStats.totalAchievements++;
@@ -27,6 +27,41 @@ export function registerAchievementTools(server: McpServer) {
                 if (achievementInfo) {
                     enhancedStats.categoryStats[achievementInfo.category] =
                         (enhancedStats.categoryStats[achievementInfo.category] || 0) + 1;
+                }
+
+                // For Smithery, return the sound URI as a resource reference
+                if (process.env.SMITHERY_ENV && soundUri.startsWith('quake://')) {
+                    return {
+                        content: [
+                            {
+                                type: "text",
+                                text: `🎯 ✨ ${achievement.toUpperCase()} ECHOES THROUGH THE ARENA at ${volume}% volume!`
+                            },
+                            {
+                                type: "resource",
+                                resource: {
+                                    uri: soundUri,
+                                    mimeType: achievementInfo.file.endsWith('.wav') ? 'audio/wav' : 'audio/mpeg',
+                                    text: `Sound: ${achievement}`
+                                }
+                            }
+                        ],
+                        success: true,
+                        achievement,
+                        volume,
+                        voiceGender: voiceGender || enhancedStats.voicePack,
+                        soundUri,
+                        stats: {
+                            totalAchievements: enhancedStats.totalAchievements,
+                            categoryStats: enhancedStats.categoryStats,
+                            lastPlayed: enhancedStats.lastPlayed,
+                            volume: enhancedStats.volume,
+                            sessionStart: enhancedStats.sessionStart,
+                            favoriteCategory: enhancedStats.favoriteCategory,
+                            voicePack: enhancedStats.voicePack,
+                            femaleVoiceStyle: enhancedStats.femaleVoiceStyle
+                        }
+                    };
                 }
 
                 return {

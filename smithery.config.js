@@ -13,7 +13,8 @@ export default {
       "path",
       "child_process",
       "os",
-      "url"
+      "url",
+      "./sounds/**"  // Include sounds directory
     ],
     minify: false,
     sourcemap: true,

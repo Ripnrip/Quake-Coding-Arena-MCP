@@ -11,16 +11,19 @@ export class EnhancedSoundOracle {
         volume: number = 80,
         voiceGender: string | null = null,
         currentVoicePack: string = 'male'
-    ): Promise<boolean> {
+    ): Promise<string> {
         const achievement = ENHANCED_ACHIEVEMENTS[achievementName.toUpperCase()];
 
         if (!achievement) {
             throw new Error(`❌ Unknown achievement: ${achievementName}`);
         }
 
-        // Skip actual playback in Smithery/production environment
-        if (process.env.SMITHERY_ENV || process.env.NODE_ENV === 'production') {
-            return true;
+        // For Smithery/cloud deployment, return the resource URI instead of playing locally
+        if (process.env.SMITHERY_ENV) {
+            const selectedVoice = voiceGender || currentVoicePack;
+            const voiceConfig = VOICE_PACKS[selectedVoice] || VOICE_PACKS.male;
+            const soundFile = achievement.file;
+            return `quake://${voiceConfig.path}/${soundFile}`;
         }
 
         // 🎤 Use selected voice pack or default to current voice pack
@@ -50,10 +53,6 @@ export class EnhancedSoundOracle {
             } else if (fs.existsSync(malePathMp3)) {
                 soundPath = malePathMp3;
             } else {
-                // In production/Smithery, fail silently
-                if (process.env.SMITHERY_ENV) {
-                    return true;
-                }
                 throw new Error(`❌ Sound file not found: ${baseName} (${achievement.file}) checked in ${projectRoot}`);
             }
         }

@@ -65,5 +65,55 @@ function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) 
 // Create the stateless server wrapper
 const { app } = createStatelessServer(createMcpServer, { schema: configSchema });
 
+// Add HTTP endpoints for serving sound files
+import * as fs from "fs";
+import * as path from "path";
+import { VOICE_PACKS } from "./utils/types.js";
+import { getProjectRoot } from "./utils/path.js";
+
+// Serve sound files via HTTP for Smithery/clients to access
+app.get("/sounds/:voicePack/:filename", (req, res) => {
+    const { voicePack, filename } = req.params;
+
+    // Validate voice pack
+    if (voicePack !== 'male' && voicePack !== 'female') {
+        return res.status(400).json({ error: 'Invalid voice pack' });
+    }
+
+    const projectRoot = getProjectRoot();
+    const voiceConfig = VOICE_PACKS[voicePack];
+    let soundPath = path.join(projectRoot, voiceConfig.path, filename);
+
+    // Check if file exists, try alternative extensions if not
+    if (!fs.existsSync(soundPath)) {
+        const baseName = filename.replace(/\.(mp3|wav)$/i, '');
+        const altPathMp3 = path.join(projectRoot, voiceConfig.path, `${baseName}.mp3`);
+        const altPathWav = path.join(projectRoot, voiceConfig.path, `${baseName}.wav`);
+
+        if (fs.existsSync(altPathMp3)) {
+            soundPath = altPathMp3;
+        } else if (fs.existsSync(altPathWav)) {
+            soundPath = altPathWav;
+        } else {
+            return res.status(404).json({ error: 'Sound file not found' });
+        }
+    }
+
+    // Set appropriate content type
+    const ext = path.extname(soundPath).toLowerCase();
+    const contentType = ext === '.mp3' ? 'audio/mpeg' : 'audio/wav';
+
+    // Read and send the file
+    try {
+        const fileData = fs.readFileSync(soundPath);
+        res.setHeader('Content-Type', contentType);
+        res.setHeader('Content-Length', fileData.length);
+        res.send(fileData);
+    } catch (error) {
+        console.error('Error reading sound file:', error);
+        res.status(500).json({ error: 'Failed to read sound file' });
+    }
+});
+
 // Export the app for Smithery - this is what Smithery expects
 export default app;
