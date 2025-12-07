@@ -153,4 +153,100 @@ export function registerAchievementTools(server: McpServer) {
             };
         }
     );
+
+    // 🔗 Get Achievement Sound URL (HTTP Streaming)
+    server.registerTool(
+        "get_achievement_sound_url",
+        {
+            description: "🔗 Get HTTP URL for streaming achievement sound (Smithery compatible)",
+            inputSchema: {
+                achievement: z.enum(Object.keys(ENHANCED_ACHIEVEMENTS) as [string, ...string[]]).describe("🏆 Enhanced achievement name"),
+                voiceGender: z.enum(["male", "female"]).optional().describe("🎤 Voice gender selection"),
+            },
+            annotations: {
+                title: "🔗 Get Sound URL",
+                readOnlyHint: true,
+                destructiveHint: false,
+                idempotentHint: true,
+                openWorldHint: false
+            }
+        },
+        async ({ achievement, voiceGender }) => {
+            const selectedVoice = voiceGender || enhancedStats.voicePack;
+            const achievementInfo = ENHANCED_ACHIEVEMENTS[achievement];
+
+            if (!achievementInfo) {
+                return {
+                    content: [{
+                        type: "text",
+                        text: `❌ Unknown achievement: ${achievement}`
+                    }],
+                    success: false
+                };
+            }
+
+            // Generate URL for the sound file
+            // In production, this would be the actual server URL
+            const baseUrl = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`;
+            const soundUrl = `${baseUrl}/sounds/${selectedVoice}/${achievementInfo.file}`;
+
+            return {
+                content: [{
+                    type: "text",
+                    text: `🔗 Sound URL for ${achievement}: ${soundUrl}`
+                }],
+                success: true,
+                achievement,
+                voicePack: selectedVoice,
+                soundUrl,
+                file: achievementInfo.file
+            };
+        }
+    );
+
+    // 🎲 Get Random Achievement Sound URL
+    server.registerTool(
+        "get_random_achievement_url",
+        {
+            description: "🎲 Get random achievement sound URL for streaming",
+            inputSchema: {
+                category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
+            },
+            annotations: {
+                title: "🎲 Get Random Sound URL",
+                readOnlyHint: true,
+                destructiveHint: false,
+                idempotentHint: false,
+                openWorldHint: false
+            }
+        },
+        async ({ category }) => {
+            const randomAchievement = EnhancedSoundOracle.getRandomAchievement(category);
+
+            if (!randomAchievement) {
+                return {
+                    content: [{
+                        type: "text",
+                        text: "❌ No achievements found for the specified category"
+                    }],
+                    success: false
+                };
+            }
+
+            const achievementInfo = ENHANCED_ACHIEVEMENTS[randomAchievement];
+            const baseUrl = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`;
+            const soundUrl = `${baseUrl}/sounds/${enhancedStats.voicePack}/${achievementInfo.file}`;
+
+            return {
+                content: [{
+                    type: "text",
+                    text: `🎲 Random achievement URL: ${soundUrl}`
+                }],
+                success: true,
+                achievement: randomAchievement,
+                soundUrl,
+                category
+            };
+        }
+    );
 }
