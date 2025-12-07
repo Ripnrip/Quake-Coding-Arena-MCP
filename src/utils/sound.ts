@@ -18,6 +18,11 @@ export class EnhancedSoundOracle {
             throw new Error(`❌ Unknown achievement: ${achievementName}`);
         }
 
+        // Skip actual playback in Smithery/production environment
+        if (process.env.SMITHERY_ENV || process.env.NODE_ENV === 'production') {
+            return true;
+        }
+
         // 🎤 Use selected voice pack or default to current voice pack
         const selectedVoice = voiceGender || currentVoicePack;
         const voiceConfig = VOICE_PACKS[selectedVoice] || VOICE_PACKS.male;
@@ -45,6 +50,10 @@ export class EnhancedSoundOracle {
             } else if (fs.existsSync(malePathMp3)) {
                 soundPath = malePathMp3;
             } else {
+                // In production/Smithery, fail silently
+                if (process.env.SMITHERY_ENV) {
+                    return true;
+                }
                 throw new Error(`❌ Sound file not found: ${baseName} (${achievement.file}) checked in ${projectRoot}`);
             }
         }
