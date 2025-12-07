@@ -19,4 +19,5 @@ export default {
     sourcemap: true,
     allowOverwrite: true,
   },
+  postBuild: "cp -r sounds .smithery/",
 };
