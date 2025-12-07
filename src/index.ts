@@ -21,12 +21,12 @@ import { registerStatsTools } from "./tools/stats.js";
 import { registerSoundResources } from "./resources/sounds.js";
 import { registerEncouragementPrompts } from "./prompts/encouragement.js";
 
-// 🎯 Configuration Schema for Smithery - Make it non-optional for better config UX
+// 🎯 Configuration Schema for Smithery
 export const configSchema = z.object({
   volume: z.number().min(0).max(100).default(80).describe("🔊 Volume level (0-100)"),
   voiceGender: z.enum(["male", "female"]).default("male").describe("🎤 Voice pack selection"),
   defaultVoiceStyle: z.string().default("sexy-announcer").describe("🎭 Female voice style"),
-});
+}).optional();
 
 // 🎭 Create Server Function - Required by Smithery
 function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) {
