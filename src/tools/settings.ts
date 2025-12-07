@@ -54,7 +54,10 @@ export function registerSettingsTools(server: McpServer) {
         "get_voice_pack_info",
         {
             description: "ℹ️ Get information about the currently active voice pack",
-            inputSchema: {}
+            inputSchema: {
+                // No parameters needed, but add a placeholder for Smithery
+                _dummy: z.string().optional().describe("No parameters required"),
+            }
         },
         async () => {
             return {
