@@ -63,7 +63,7 @@ function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) 
 }
 
 // Create the stateless server wrapper
-const { app } = createStatelessServer(createMcpServer, { configSchema });
+const { app } = createStatelessServer(createMcpServer, { schema: configSchema });
 
 // Export the app for Smithery - this is what Smithery expects
 export default app;

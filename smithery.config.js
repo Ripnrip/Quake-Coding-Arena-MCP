@@ -1,6 +1,6 @@
 export default {
   esbuild: {
-    entryPoints: ["src/index.ts"],
+    entryPoints: ["src/stateless-wrapper.ts"],
     bundle: true,
     platform: "node",
     target: "node18",
