@@ -62,5 +62,8 @@ function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) 
   return server.server; // Return the underlying Server
 }
 
-// Export for Smithery SDK
-export default createStatelessServer(createMcpServer, { configSchema });
+// Create the stateless server wrapper
+const { app } = createStatelessServer(createMcpServer, { configSchema });
+
+// Export the app for Smithery - this is what Smithery expects
+export default app;
