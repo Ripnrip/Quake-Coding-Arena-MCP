@@ -69,7 +69,7 @@ smithery install quake-coding-arena-enhanced
 
 ### **Option 3: GitHub Pages Website**
 
-Visit the live soundboard at: `https://[username].github.io/Quake-Coding-Arena-MCP/`
+Visit the live soundboard at: **https://ripnrip.github.io/Quake-Coding-Arena-MCP/**
 
 The website includes:
 - ✅ Interactive soundboard with all 25 achievements
