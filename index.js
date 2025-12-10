@@ -6,7 +6,7 @@
  * "Where coding victories become legendary achievements, and every
  * keystroke echoes through the digital arena with authentic male/female Quake voices!"
  *
- * Features: 11 achievements, voice switching (male/female), WAV/MP3 support
+ * Features: 15 achievements, voice switching (male/female), WAV/MP3 support
  *
  * - The Enhanced Quake Arena Master of Node.js
  */
@@ -19,6 +19,9 @@ const {
   ListToolsRequestSchema,
   McpError,
 } = require('@modelcontextprotocol/sdk/types.js');
+
+const fs = require('fs');
+const path = require('path');
 
 // 🌟 The cosmic configuration of our enhanced digital arena
 // Now with actual downloaded Quake sounds!
@@ -35,7 +38,11 @@ const ENHANCED_ACHIEVEMENTS = {
   'IMPRESSIVE': { file: 'impressive.mp3', category: 'quality', threshold: 1 },
 
   // 🔥 Special Multi-kills (Available Sounds)
+  'DOUBLE KILL': { file: 'double-kill.mp3', category: 'multi', threshold: 2 },
+  'TRIPLE KILL': { file: 'triple-kill.mp3', category: 'multi', threshold: 3 },
+  'ULTRA KILL':  { file: 'ultra-kill.mp3', category: 'multi', threshold: 4 },
   'WICKED SICK': { file: 'wicked-sick.mp3', category: 'multi', threshold: 7 },
+  'HOLY SHIT':   { file: 'holy-shit.mp3', category: 'multi', threshold: 10 },
 
   // 🎪 Game State Announcements (Available Sounds)
   'HUMILIATION': { file: 'humiliation.mp3', category: 'game', threshold: 1 },
@@ -293,8 +300,8 @@ class EnhancedQuakeMCPServer {
               properties: {
                 category: {
                   type: "string",
-                  description: "🎯 Filter by category (streak, quality, multi, game, team)",
-                  enum: ["streak", "quality", "multi", "game", "team"],
+                  description: "🎯 Filter by category (streak, quality, multi, game, team, custom)",
+                  enum: ["streak", "quality", "multi", "game", "team", "custom"],
                 },
               },
             },
@@ -337,8 +344,8 @@ class EnhancedQuakeMCPServer {
               properties: {
                 category: {
                   type: "string",
-                  description: "🎯 Filter by category (streak, quality, multi, game, team, powerup)",
-                  enum: ["streak", "quality", "multi", "game", "team", "powerup"],
+                  description: "🎯 Filter by category (streak, quality, multi, game, team, powerup, custom)",
+                  enum: ["streak", "quality", "multi", "game", "team", "powerup", "custom"],
                 },
                 volume: {
                   type: "number",

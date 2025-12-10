@@ -7,26 +7,39 @@ export interface Achievement {
 }
 
 export const ENHANCED_ACHIEVEMENTS: Record<string, Achievement> = {
-    // 🎯 Classic Kill Streaks (Available Sounds)
+    // 🎯 Classic Kill Streaks (Available in both male and female)
     'RAMPAGE': { file: 'rampage.mp3', category: 'streak', threshold: 10 },
     'DOMINATING': { file: 'dominating.mp3', category: 'streak', threshold: 15 },
     'UNSTOPPABLE': { file: 'unstoppable.mp3', category: 'streak', threshold: 20 },
     'GODLIKE': { file: 'godlike.mp3', category: 'streak', threshold: 25 },
 
-    // ✨ Quality Achievements (Available Sounds)
+    // ✨ Quality Achievements (Male only - will fallback)
     'EXCELLENT': { file: 'excellent.mp3', category: 'quality', threshold: 1 },
     'PERFECT': { file: 'perfect.mp3', category: 'quality', threshold: 1 },
     'IMPRESSIVE': { file: 'impressive.mp3', category: 'quality', threshold: 1 },
 
-    // 🔥 Special Multi-kills (Available Sounds)
+    // 🔥 Special Multi-kills (Available in both male and female)
     'WICKED SICK': { file: 'wicked-sick.mp3', category: 'multi', threshold: 7 },
+    'HEADSHOT': { file: 'headshot.mp3', category: 'multi', threshold: 1 },
+    'MULTI KILL': { file: 'multi-kill.mp3', category: 'multi', threshold: 2 },
+    'ULTRA KILL': { file: 'ultra-kill.mp3', category: 'multi', threshold: 4 },
+    'MONSTER KILL': { file: 'monster-kill.mp3', category: 'multi', threshold: 6 },
+    'LUDICROUS KILL': { file: 'ludicrous-kill.mp3', category: 'multi', threshold: 8 },
+    'KILLING SPREE': { file: 'killing-spree.mp3', category: 'multi', threshold: 3 },
 
-    // 🎪 Game State Announcements (Available Sounds)
+    // 🎪 Game State Announcements (Available in both male and female)
     'HUMILIATION': { file: 'humiliation.mp3', category: 'game', threshold: 1 },
     'FIRST BLOOD': { file: 'first-blood.mp3', category: 'game', threshold: 1 },
+    'HOLY SHIT': { file: 'holy-shit.mp3', category: 'game', threshold: 1 },
+    'BOTTOM FEEDER': { file: 'bottom-feeder.mp3', category: 'game', threshold: 1 },
 
-    // 👥 Team Achievements (Available Sounds)
-    'PREPARE TO FIGHT': { file: 'prepare-to-fight.mp3', category: 'team', threshold: 1 }
+    // 👥 Team Achievements (Male only - will fallback)
+    'PREPARE TO FIGHT': { file: 'prepare-to-fight.mp3', category: 'team', threshold: 1 },
+    'PLAY': { file: 'play.mp3', category: 'team', threshold: 1 },
+
+    // Additional male-only achievements
+    'DOUBLE KILL': { file: 'double-kill.mp3', category: 'multi', threshold: 2 },
+    'TRIPLE KILL': { file: 'triple-kill.mp3', category: 'multi', threshold: 3 }
 };
 
 // 🎤 Available voice pack configurations
@@ -43,9 +56,9 @@ export const VOICE_PACKS: Record<string, VoicePack> = {
         description: 'Classic Quake 3 Arena male announcer voice'
     },
     female: {
-        path: 'sounds/female/sexy-announcer',
-        displayName: 'Sexy Female Announcer',
-        description: 'Authentic female announcer voice pack with energetic tone (WAV format)'
+        path: 'sounds/female',
+        displayName: 'Female Announcer',
+        description: 'Authentic female announcer voice pack with energetic tone'
     }
 };
 

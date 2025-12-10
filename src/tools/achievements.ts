@@ -8,11 +8,11 @@ export function registerAchievementTools(server: McpServer) {
     server.registerTool(
         "play_enhanced_quake_sound",
         {
-            description: "🏆 Plays a high-quality enhanced Quake achievement sound with voice pack support",
+            description: "🏆 Plays a high-quality enhanced Quake 3 Arena achievement sound with dual voice pack support (male/female). Triggers audio playback on the local system and updates session statistics. Supports 25 different achievements across 5 categories: streak, quality, multi-kill, game events, and team events.",
             inputSchema: {
-                achievement: z.enum(Object.keys(ENHANCED_ACHIEVEMENTS) as [string, ...string[]]).describe("🏆 Enhanced achievement name"),
-                volume: z.number().min(0).max(100).default(80).describe("🔊 Enhanced volume level (0-100)"),
-                voiceGender: z.enum(["male", "female"]).optional().describe("🎤 Voice gender selection"),
+                achievement: z.enum(Object.keys(ENHANCED_ACHIEVEMENTS) as [string, ...string[]]).describe("🏆 Achievement name to play. Available achievements: RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE (streak), EXCELLENT, PERFECT, IMPRESSIVE (quality), WICKED SICK, HEADSHOT, MULTI KILL, ULTRA KILL, MONSTER KILL, LUDICROUS KILL, KILLING SPREE, DOUBLE KILL, TRIPLE KILL (multi-kill), FIRST BLOOD, HUMILIATION, HOLY SHIT, BOTTOM FEEDER (game events), PREPARE TO FIGHT, PLAY (team events). Examples: 'GODLIKE', 'FIRST BLOOD', 'HEADSHOT'"),
+                volume: z.number().min(0).max(100).default(80).describe("🔊 Volume level for audio playback (0-100). Default is 80. Set to 0 for silent, 100 for maximum volume. Examples: 50, 80, 100"),
+                voiceGender: z.enum(["male", "female"]).optional().describe("🎤 Voice pack selection for this specific playback. Options: 'male' (Classic Quake 3 Arena male announcer, 15 sounds), 'female' (Female announcer voice pack, 16 sounds). If omitted, uses the currently set default voice pack. Examples: 'male', 'female'"),
             },
             annotations: {
                 title: "🏆 Play Achievement Sound",
@@ -73,10 +73,17 @@ export function registerAchievementTools(server: McpServer) {
     server.registerTool(
         "random_enhanced_achievement",
         {
-            description: "🎲 Play a random achievement sound from a specific category",
+            description: "🎲 Play a random achievement sound from a specific category. Useful for surprise celebrations or testing different achievement sounds. Returns the selected achievement name.",
             inputSchema: {
-                category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
-                volume: z.number().min(0).max(100).default(80).describe("🔊 Enhanced volume level (0-100)"),
+                category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter achievements by category. Options: 'streak' (RAMPAGE, DOMINATING, etc.), 'quality' (EXCELLENT, PERFECT, etc.), 'multi' (WICKED SICK, HEADSHOT, etc.), 'game' (FIRST BLOOD, HUMILIATION, etc.), 'team' (PREPARE TO FIGHT, PLAY). If omitted, selects from all categories."),
+                volume: z.number().min(0).max(100).default(80).describe("🔊 Volume level for audio playback (0-100). Default is 80. Higher values increase audio volume."),
+            },
+            annotations: {
+                title: "🎲 Random Achievement",
+                readOnlyHint: false,
+                destructiveHint: false,
+                idempotentHint: false,
+                openWorldHint: true
             }
         },
         async ({ category, volume }) => {
@@ -118,9 +125,9 @@ export function registerAchievementTools(server: McpServer) {
     server.registerTool(
         "list_enhanced_achievements",
         {
-            description: "📋 List all available enhanced achievements and their categories",
+            description: "📋 List all available enhanced achievements and their categories. Returns achievement names, categories, and thresholds. Useful for discovering available achievements or filtering by category type.",
             inputSchema: {
-                category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter by category"),
+                category: z.enum(["streak", "quality", "multi", "game", "team"]).optional().describe("🎯 Filter achievements by category. Options: 'streak' (kill streak achievements like RAMPAGE, DOMINATING), 'quality' (quality-based achievements like EXCELLENT, PERFECT), 'multi' (multi-kill achievements like WICKED SICK, HEADSHOT), 'game' (game state announcements like FIRST BLOOD, HUMILIATION), 'team' (team events like PREPARE TO FIGHT, PLAY). If omitted, returns all achievements. Examples: 'streak', 'multi'"),
             },
             annotations: {
                 title: "📋 List Achievements",

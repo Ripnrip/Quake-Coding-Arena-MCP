@@ -1,20 +1,42 @@
-const SOUND_BASE_URL = 'https://raw.githubusercontent.com/Ripnrip/Quake-Coding-Arena-MCP/main/sounds/male/';
+// 🎭 Enhanced Quake Coding Arena Soundboard
+// 25 Epic Achievements with Dual Voice System
 
+const SOUND_BASE_URL_MALE = 'https://raw.githubusercontent.com/Ripnrip/Quake-Coding-Arena-MCP/main/sounds/male/';
+const SOUND_BASE_URL_FEMALE = 'https://raw.githubusercontent.com/Ripnrip/Quake-Coding-Arena-MCP/main/sounds/female/';
+
+// 🏆 All 25 Enhanced Achievements
 const ACHIEVEMENTS = [
-    { name: 'RAMPAGE', file: 'rampage.mp3', category: 'streak', icon: '🔥', femaleUrl: 'https://hoovers.101soundboards.com/sb/board_sounds_rendered/jpayxn.mp3?signature=BgrtU1JYrSmeM7GkpcMWzw&expires=1764979199' },
-    { name: 'DOMINATING', file: 'dominating.mp3', category: 'streak', icon: '💀', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480735-quake-female-dominating.mp3?signature=bHmoWXckwdiXkIKtLVS4xA&expires=1764979199' },
-    { name: 'UNSTOPPABLE', file: 'unstoppable.mp3', category: 'streak', icon: '🛑', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480744-quake-female-unstoppable.mp3?signature=XNbG3X7eGWigPJ4heQZWeQ&expires=1764979199' },
-    { name: 'GODLIKE', file: 'godlike.mp3', category: 'streak', icon: '⚡', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480737-quake-female-godlike.mp3?signature=SyAlzb4XG5TA0mk8HdDsJw&expires=1764979199' },
-    { name: 'EXCELLENT', file: 'excellent.mp3', category: 'quality', icon: '✨' },
-    { name: 'PERFECT', file: 'perfect.mp3', category: 'quality', icon: '💎' },
-    { name: 'IMPRESSIVE', file: 'impressive.mp3', category: 'quality', icon: '🌟' },
-    { name: 'WICKED SICK', file: 'wickedsick.mp3', category: 'multi', icon: '☣️', url: 'https://www.myinstants.com/media/sounds/wickedsick.mp3', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480745-quake-female-wickedsick.mp3?signature=HBiOVyKzGHJu8zlfxHjAzg&expires=1764979199' },
-    { name: 'MULTIKILL', file: 'wicked-sick.mp3', category: 'multi', icon: '💥', femaleUrl: 'https://hoovers.101soundboards.com/sb/board_sounds_rendered/lpxrel.mp3?signature=EWaLi-LDj0lhNA4RBfilHA&expires=1764979199', onlyFemale: true },
-    { name: 'HUMILIATION', file: 'humiliation_1.mp3', category: 'game', icon: '🎭', url: 'https://www.myinstants.com/media/sounds/humiliation_1.mp3' },
-    { name: 'HOLY SHIT', file: 'humiliation_1.mp3', category: 'game', icon: '😱', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480739-quake-female-holyshit.mp3?signature=RYR_coYIJ3euvgtzxxEJ7g&expires=1764979199', onlyFemale: true },
-    { name: 'FIRST BLOOD', file: 'first-blood.mp3', category: 'game', icon: '🩸', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480736-quake-female-firstblood.mp3?signature=q7PPEc-LdmE72E0o3xjTZg&expires=1764979199' },
-    { name: 'HEADSHOT', file: 'first-blood.mp3', category: 'game', icon: '🎯', femaleUrl: 'https://www.101soundboards.com/storage/board_sounds_rendered/480738-quake-female-headshot.mp3?signature=5Qe3O4yLv6a9UQRV-VucBA&expires=1764979199', onlyFemale: true },
-    { name: 'PREPARE TO FIGHT', file: 'prepare-to-fight.mp3', category: 'team', icon: '⚔️' }
+    // 🔥 Streak Achievements (Both Voices)
+    { name: 'RAMPAGE', file: 'rampage.mp3', category: 'streak', icon: '🔥', threshold: 10 },
+    { name: 'DOMINATING', file: 'dominating.mp3', category: 'streak', icon: '💀', threshold: 15 },
+    { name: 'UNSTOPPABLE', file: 'unstoppable.mp3', category: 'streak', icon: '🛑', threshold: 20 },
+    { name: 'GODLIKE', file: 'godlike.mp3', category: 'streak', icon: '⚡', threshold: 25 },
+    
+    // ✨ Quality Achievements (Male Voice)
+    { name: 'EXCELLENT', file: 'excellent.mp3', category: 'quality', icon: '✨', maleOnly: true },
+    { name: 'PERFECT', file: 'perfect.mp3', category: 'quality', icon: '💎', maleOnly: true },
+    { name: 'IMPRESSIVE', file: 'impressive.mp3', category: 'quality', icon: '🌟', maleOnly: true },
+    
+    // ⚔️ Multi-Kill Achievements
+    { name: 'WICKED SICK', file: 'wicked-sick.mp3', category: 'multi', icon: '☣️', threshold: 7 },
+    { name: 'HEADSHOT', file: 'headshot.mp3', category: 'multi', icon: '🎯', femaleOnly: true },
+    { name: 'MULTI KILL', file: 'multi-kill.mp3', category: 'multi', icon: '💥', femaleOnly: true },
+    { name: 'KILLING SPREE', file: 'killing-spree.mp3', category: 'multi', icon: '🔪', femaleOnly: true },
+    { name: 'ULTRA KILL', file: 'ultra-kill.mp3', category: 'multi', icon: '⚡', femaleOnly: true },
+    { name: 'MONSTER KILL', file: 'monster-kill.mp3', category: 'multi', icon: '👹', femaleOnly: true },
+    { name: 'LUDICROUS KILL', file: 'ludicrous-kill.mp3', category: 'multi', icon: '🤯', femaleOnly: true },
+    { name: 'DOUBLE KILL', file: 'double-kill.mp3', category: 'multi', icon: '⚔️', maleOnly: true },
+    { name: 'TRIPLE KILL', file: 'triple-kill.mp3', category: 'multi', icon: '🗡️', maleOnly: true },
+    
+    // 🎪 Game State Announcements
+    { name: 'FIRST BLOOD', file: 'first-blood.mp3', category: 'game', icon: '🩸' },
+    { name: 'HUMILIATION', file: 'humiliation.mp3', category: 'game', icon: '🎭', maleOnly: true },
+    { name: 'HOLY SHIT', file: 'holy-shit.mp3', category: 'game', icon: '😱' },
+    { name: 'BOTTOM FEEDER', file: 'bottom-feeder.mp3', category: 'game', icon: '🐟', femaleOnly: true },
+    
+    // 👥 Team Events
+    { name: 'PREPARE TO FIGHT', file: 'prepare-to-fight.mp3', category: 'team', icon: '⚔️', maleOnly: true },
+    { name: 'PLAY', file: 'play.mp3', category: 'team', icon: '▶️', femaleOnly: true }
 ];
 
 const grid = document.getElementById('soundGrid');
@@ -22,8 +44,14 @@ const volumeSlider = document.getElementById('volume');
 const voiceToggle = document.getElementById('voiceToggle');
 const packSubtitle = document.getElementById('packSubtitle');
 const toggleLabels = document.querySelectorAll('.toggle-label');
+const categoryFilters = document.querySelectorAll('.filter-btn');
+const totalAchievements = document.getElementById('totalAchievements');
+const currentVoice = document.getElementById('currentVoice');
+const volumeDisplay = document.getElementById('volumeDisplay');
+const volumeValue = document.getElementById('volumeValue');
 
 let audioContext = null;
+let currentCategory = 'all';
 
 // Helper to init audio context on first user interaction
 function initAudio() {
@@ -35,51 +63,67 @@ function initAudio() {
     }
 }
 
+function getSoundUrl(achievement, isFemale) {
+    const baseUrl = isFemale ? SOUND_BASE_URL_FEMALE : SOUND_BASE_URL_MALE;
+    
+    // Handle special cases
+    if (isFemale && achievement.femaleOnly) {
+        return `${SOUND_BASE_URL_FEMALE}${achievement.file}`;
+    }
+    if (!isFemale && achievement.maleOnly) {
+        return `${SOUND_BASE_URL_MALE}${achievement.file}`;
+    }
+    
+    // Try female first if female mode, fallback to male
+    if (isFemale) {
+        // For achievements available in both, prefer female
+        return `${SOUND_BASE_URL_FEMALE}${achievement.file}`;
+    }
+    
+    return `${baseUrl}${achievement.file}`;
+}
+
 function renderGrid() {
     grid.innerHTML = '';
     const isFemale = voiceToggle.checked;
-
-    ACHIEVEMENTS.forEach(ach => {
-        // Show female-only buttons ONLY in female mode
-        if (ach.onlyFemale && !isFemale) return;
-
+    
+    // Filter achievements based on voice and category
+    const filtered = ACHIEVEMENTS.filter(ach => {
+        // Voice filtering
+        if (isFemale && ach.maleOnly) return false;
+        if (!isFemale && ach.femaleOnly) return false;
+        
+        // Category filtering
+        if (currentCategory !== 'all' && ach.category !== currentCategory) return false;
+        
+        return true;
+    });
+    
+    totalAchievements.textContent = `${filtered.length} Achievements`;
+    currentVoice.textContent = isFemale ? 'Female Voice' : 'Male Voice';
+    
+    filtered.forEach(ach => {
         const btn = document.createElement('div');
         btn.className = `sound-btn category-${ach.category}`;
+        
+        // Add voice-specific class
+        if (ach.maleOnly) btn.classList.add('male-only');
+        if (ach.femaleOnly) btn.classList.add('female-only');
+        
         btn.innerHTML = `
             <div class="sound-icon">${ach.icon}</div>
             <div class="sound-name">${ach.name}</div>
-            <div class="sound-category">${ach.category}</div>
+            <div class="sound-category">${ach.category.toUpperCase()}</div>
+            ${ach.threshold ? `<div class="sound-threshold">Threshold: ${ach.threshold}</div>` : ''}
         `;
-
-        // Preload audio logic
 
         const handlePlay = (e) => {
             if (e.type === 'touchstart') e.preventDefault();
             initAudio();
 
-            // Determine URL
-            let currentUrl;
-            let playbackRate = 1.0;
-
-            if (isFemale) {
-                if (ach.femaleUrl) {
-                    currentUrl = ach.femaleUrl;
-                } else {
-                    currentUrl = ach.url || `${SOUND_BASE_URL}${ach.file}`;
-                    playbackRate = 1.25;
-                }
-            } else {
-                currentUrl = ach.url || `${SOUND_BASE_URL}${ach.file}`;
-            }
-
-            const audio = new Audio(currentUrl);
-            audio.playbackRate = playbackRate;
-
-            if (playbackRate !== 1.0) {
-                if (audio.preservesPitch !== undefined) audio.preservesPitch = false;
-                else if (audio.mozPreservesPitch !== undefined) audio.mozPreservesPitch = false;
-                else if (audio.webkitPreservesPitch !== undefined) audio.webkitPreservesPitch = false;
-            }
+            const soundUrl = getSoundUrl(ach, isFemale);
+            const audio = new Audio(soundUrl);
+            audio.volume = volumeSlider.value / 100;
 
             playSound(audio, btn);
         };
@@ -89,10 +133,13 @@ function renderGrid() {
 
         grid.appendChild(btn);
     });
+    
+    if (filtered.length === 0) {
+        grid.innerHTML = '<div class="no-results">No achievements found for this filter combination</div>';
+    }
 }
 
 function playSound(audioObj, btnElement) {
-    audioObj.volume = volumeSlider.value;
     btnElement.classList.add('playing');
 
     const playPromise = audioObj.play();
@@ -106,6 +153,15 @@ function playSound(audioObj, btnElement) {
             .catch(error => {
                 console.error("Playback failed:", error);
                 btnElement.classList.remove('playing');
+                // Try fallback to male voice if female fails
+                if (voiceToggle.checked) {
+                    const achievement = ACHIEVEMENTS.find(a => a.name === btnElement.querySelector('.sound-name').textContent);
+                    if (achievement && !achievement.femaleOnly) {
+                        const fallbackAudio = new Audio(`${SOUND_BASE_URL_MALE}${achievement.file}`);
+                        fallbackAudio.volume = volumeSlider.value / 100;
+                        playSound(fallbackAudio, btnElement);
+                    }
+                }
             });
     }
 }
@@ -124,11 +180,29 @@ function updateUI() {
     // Theme accent color update
     document.documentElement.style.setProperty('--quake-red', isFemale ? '#ff4081' : '#d32f2f');
 
-    // Re-render grid to show/hide gender specific sounds if any
+    // Re-render grid
     renderGrid();
 }
 
+function updateVolume() {
+    const volume = volumeSlider.value;
+    volumeDisplay.textContent = `Volume: ${volume}%`;
+    volumeValue.textContent = `${volume}%`;
+}
+
+// Event Listeners
 voiceToggle.addEventListener('change', updateUI);
+volumeSlider.addEventListener('input', updateVolume);
+
+categoryFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+        categoryFilters.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.category;
+        renderGrid();
+    });
+});
 
 // Init UI
 updateUI();
+updateVolume();

@@ -1,6 +1,6 @@
 # 🎯 Enhanced Quake Coding Arena - Complete Guide
 
-**11 authentic Quake achievement sounds for Claude Desktop, Cursor IDE, and more!**
+**15 authentic Quake achievement sounds for Claude Desktop, Cursor IDE, and more!**
 
 ---
 
@@ -9,7 +9,7 @@
 Enhanced Quake Coding Arena is a **comprehensive MCP (Model Context Protocol) server** that brings the legendary Quake 3 Arena announcer to your coding environment. It transforms routine coding sessions into epic gaming experiences with authentic Quake sound effects, intelligent achievement tracking, and smart volume control.
 
 ### ✅ **What's Included:**
-- **11 authentic Quake sounds** across 5 categories
+- **15 authentic Quake sounds** across 5 categories
 - **🎤 Multiple voice packs** - Male and female announcer options
 - **Node.js MCP server** with professional-grade implementation
 - **Cross-platform support** (macOS, Windows, Linux)
@@ -285,7 +285,7 @@ node test-mcp-server.cjs
 claude-desktop-enhanced/
 ├── index.js                    # Main MCP server (27KB)
 ├── package.json                 # Node.js dependencies
-├── sounds/                     # Achievement sound files (11 files)
+├── sounds/                     # Achievement sound files (15 files)
 │   ├── dominating.mp3            # Dominating achievement
 │   ├── excellent.mp3             # Excellent achievement
 │   ├── first-blood.mp3           # First blood achievement
@@ -385,7 +385,7 @@ node test-mcp-server.cjs
 ## 🏆 **ACHIEVEMENT UNLOCKED**
 
 ### **Development Status:** ✅ **PRODUCTION READY**
-- ✅ 11 authentic Quake sounds integrated
+- ✅ 15 authentic Quake sounds integrated
 - ✅ Professional Node.js MCP server
 - ✅ Cross-platform compatibility verified
 - ✅ Claude Desktop integration complete

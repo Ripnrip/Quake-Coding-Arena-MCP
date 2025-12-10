@@ -1,7 +1,7 @@
 {
   "name": "quake-coding-arena-enhanced",
   "version": "2.1.1",
-  "description": "🎯 Premium TypeScript MCP server with 11 Quake 3 Arena achievements, dual voice system (male/female), and complete gamification for your coding environment.\n\n🎮 Features:\n• 11 Epic Achievements: RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE, EXCELLENT, PERFECT, IMPRESSIVE, WICKED SICK, FIRST BLOOD, HUMILIATION, PREPARE TO FIGHT\n• Dual Voice Packs: Male & Female announcers\n• 7 Tools: play_enhanced_quake_sound, random_enhanced_achievement, list_enhanced_achievements, get_enhanced_achievement_stats, set_enhanced_volume, set_voice_pack, get_voice_pack_info\n• Resources: Access to all sound files (MP3/WAV)\n• Prompts: encourage-developer, celebrate-victory",
+  "description": "🎯 Premium TypeScript MCP server with 25 Quake 3 Arena achievements, dual voice system (male/female) with 16 female + 17 male sounds, and complete gamification for your coding environment. Features: 25 Epic Achievements including RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE, EXCELLENT, PERFECT, IMPRESSIVE, WICKED SICK, HEADSHOT, MULTI KILL, ULTRA KILL, MONSTER KILL, LUDICROUS KILL, KILLING SPREE, DOUBLE KILL, TRIPLE KILL, FIRST BLOOD, HUMILIATION, HOLY SHIT, BOTTOM FEEDER, PREPARE TO FIGHT, PLAY. Dual Voice Packs: 16 Female + 17 Male announcer sounds with smart fallback. 11 MCP Tools for complete control. Resources: Access to all sound files via quake:// URIs. Cloud-ready: Full Smithery deployment support with HTTP endpoints.",
   "type": "module",
   "main": ".smithery/index.cjs",
   "module": "src/index.ts",

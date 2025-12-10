@@ -5,7 +5,7 @@ runtime: "typescript"
 
 # Server metadata for Smithery registry
 name: "Enhanced Quake Coding Arena"
-description: "Gamified coding with Quake 3 Arena voice packs & 11 achievements"
+description: "Gamified coding with Quake 3 Arena voice packs & 25 achievements, dual voice system (16 female + 17 male sounds)"
 
 # Server entry point for the MCP server
 entryPoint: "src/index.ts"

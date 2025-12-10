@@ -48,11 +48,15 @@ Settings → MCP → Add Server:
 - **PERFECT** - Flawless implementation
 - **IMPRESSIVE** - Creative brilliance
 
-### **⚔️ Special**
-- **WICKED SICK** - 7 achievements in row
-- **FIRST BLOOD** - First breakthrough
-- **HUMILIATION** - Quick challenge defeat
-- **PREPARE TO FIGHT** - Session start
+### **⚔️ Special / Multi-kills**
+- **DOUBLE KILL** – Two quick wins back-to-back
+- **TRIPLE KILL** – Three rapid wins in a row
+- **ULTRA KILL** – Four insane victories during a single flow streak
+- **WICKED SICK** – 7 achievements in a row, or an absolutely wild solution
+- **HOLY SHIT** – When something so crazy happens it deserves a legendary call-out
+- **FIRST BLOOD** – First breakthrough
+- **HUMILIATION** – Quick challenge defeat
+- **PREPARE TO FIGHT** – Session start
 
 ---
 

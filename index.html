@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quake Coding Arena Soundboard</title>
+    <meta name="description" content="Enhanced Quake Coding Arena - 25 Epic Achievements with Dual Voice System (Male/Female)">
+    <title>Enhanced Quake Coding Arena - 25 Achievements | Dual Voice System</title>
     <link rel="stylesheet" href="style.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +29,7 @@
                 <h1>QUAKE <span class="highlight">CODING</span> ARENA</h1>
             </div>
             <p class="subtitle" id="packSubtitle">MALE ANNOUNCER PACK</p>
+            <p class="version">v2.2 - 25 Epic Achievements | 15 Male + 16 Female Sounds</p>
 
             <div class="voice-toggle-container">
                 <span class="toggle-label">MALE</span>
@@ -37,9 +39,23 @@
                 </label>
                 <span class="toggle-label female">FEMALE</span>
             </div>
+
+            <div class="category-filters" id="categoryFilters">
+                <button class="filter-btn active" data-category="all">ALL</button>
+                <button class="filter-btn" data-category="streak">🔥 STREAK</button>
+                <button class="filter-btn" data-category="quality">✨ QUALITY</button>
+                <button class="filter-btn" data-category="multi">⚔️ MULTI-KILL</button>
+                <button class="filter-btn" data-category="game">🎪 GAME</button>
+                <button class="filter-btn" data-category="team">👥 TEAM</button>
+            </div>
         </header>
 
         <main>
+            <div class="stats-bar">
+                <span id="totalAchievements">25 Achievements</span>
+                <span id="currentVoice">Male Voice</span>
+                <span id="volumeDisplay">Volume: 80%</span>
+            </div>
             <div class="sound-grid" id="soundGrid">
                 <!-- Sound buttons will be injected here by JS -->
             </div>
@@ -48,9 +64,17 @@
         <footer>
             <div class="volume-control">
                 <label for="volume">MASTER VOLUME</label>
-                <input type="range" id="volume" min="0" max="1" step="0.1" value="0.8">
+                <input type="range" id="volume" min="0" max="100" step="5" value="80">
+                <span id="volumeValue">80%</span>
             </div>
-            <p>Built with <span style="color:red">❤</span> by Antigravity</p>
+            <div class="footer-info">
+                <p>Built with <span style="color:red">❤</span> by the Quake Coding Arena Team</p>
+                <p class="footer-links">
+                    <a href="https://github.com/Ripnrip/Quake-Coding-Arena-MCP" target="_blank">GitHub</a> |
+                    <a href="https://smithery.ai/server/quake-coding-arena-enhanced" target="_blank">Smithery</a> |
+                    <a href="README.md" target="_blank">Docs</a>
+                </p>
+            </div>
         </footer>
     </div>
     <script src="script.js"></script>

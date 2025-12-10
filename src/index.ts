@@ -6,20 +6,24 @@
  * "Where coding victories become legendary achievements, and every
  * keystroke echoes through the digital arena with authentic male/female Quake voices!"
  *
- * Features: 11 achievements, voice switching (male/female), WAV/MP3 support, Resources, Prompts
+ * Features: 15 achievements, voice switching (male/female), WAV/MP3 support, Resources, Prompts
  *
  * - The Enhanced Quake Arena Master of TypeScript
  */
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { createStatelessServer } from "@smithery/sdk/server/stateless.js";
+import { createStatelessServer } from "@smithery/sdk/server";
 import { z } from "zod";
 import { enhancedStats } from "./utils/types.js";
 import { registerAchievementTools } from "./tools/achievements.js";
 import { registerSettingsTools } from "./tools/settings.js";
 import { registerStatsTools } from "./tools/stats.js";
+import { registerGuideTools } from "./tools/guides.js";
 import { registerSoundResources } from "./resources/sounds.js";
 import { registerEncouragementPrompts } from "./prompts/encouragement.js";
+
+import fs from 'fs';
+import path from 'path';
 
 // 🎯 Configuration Schema for Smithery
 export const configSchema = z.object({
@@ -52,6 +56,7 @@ function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) 
   registerAchievementTools(server);
   registerSettingsTools(server);
   registerStatsTools(server);
+  registerGuideTools(server);
 
   // Register resources
   registerSoundResources(server.server);
