@@ -51,23 +51,25 @@ node run-server.ts
 
 ### **Option 2: Remote (Smithery) Deployment**
 
+**⚠️ Important:** Smithery packages are NOT on npm - they use HTTP endpoints!
+
 ```bash
 # Run remote setup script
 ./setup-remote.sh
 
-# Or install from Smithery registry
-smithery install quake-coding-arena-enhanced
-
-# Or add to your MCP configuration
+# Or use Smithery HTTP endpoint directly
+# Add to your MCP configuration:
 {
   "mcpServers": {
     "quake-arena": {
-      "command": "npx",
-      "args": ["@Ripnrip/quake-coding-arena-mcp"]
+      "transport": "http",
+      "url": "https://server.smithery.ai/@Ripnrip/quake-coding-arena-mcp/mcp"
     }
   }
 }
 ```
+
+**Note:** For local development/testing, use the local build method (Option 1) instead of npx.
 
 ### **Option 3: GitHub Pages Website**
 

@@ -1,12 +1,12 @@
 {
-  "name": "quake-coding-arena-enhanced",
-  "version": "2.1.1",
-  "description": "🎯 Premium TypeScript MCP server with 25 Quake 3 Arena achievements, dual voice system (male/female) with 16 female + 17 male sounds, and complete gamification for your coding environment. Features: 25 Epic Achievements including RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE, EXCELLENT, PERFECT, IMPRESSIVE, WICKED SICK, HEADSHOT, MULTI KILL, ULTRA KILL, MONSTER KILL, LUDICROUS KILL, KILLING SPREE, DOUBLE KILL, TRIPLE KILL, FIRST BLOOD, HUMILIATION, HOLY SHIT, BOTTOM FEEDER, PREPARE TO FIGHT, PLAY. Dual Voice Packs: 16 Female + 17 Male announcer sounds with smart fallback. 11 MCP Tools for complete control. Resources: Access to all sound files via quake:// URIs. Cloud-ready: Full Smithery deployment support with HTTP endpoints.",
+  "name": "@ripnrip/quake-coding-arena-mcp",
+  "version": "2.2.0",
+  "description": "🎯 Premium TypeScript MCP server with 25 Quake 3 Arena achievements, dual voice system (male/female) with 16 female + 17 male sounds, and complete gamification for your coding environment. Features: 25 Epic Achievements including RAMPAGE, DOMINATING, UNSTOPPABLE, GODLIKE, EXCELLENT, PERFECT, IMPRESSIVE, WICKED SICK, HEADSHOT, MULTI KILL, ULTRA KILL, MONSTER KILL, LUDICROUS KILL, KILLING SPREE, DOUBLE KILL, TRIPLE KILL, FIRST BLOOD, HUMILIATION, HOLY SHIT, BOTTOM FEEDER, PREPARE TO FIGHT, PLAY. Dual Voice Packs: 16 Female + 17 Male announcer sounds with smart fallback. 10 MCP Tools for complete control. Resources: Access to all sound files via quake:// URIs. Cloud-ready: Full Smithery deployment support with HTTP endpoints.",
   "type": "module",
   "main": ".smithery/index.cjs",
   "module": "src/index.ts",
   "bin": {
-    "quake-arena-mcp": "src/index.ts"
+    "quake-arena-mcp": ".smithery/index.cjs"
   },
   "scripts": {
     "build": "npx smithery build",
@@ -16,7 +16,9 @@
     "test": "npx smithery dev",
     "smithery:dev": "npx smithery dev",
     "smithery:build": "npx smithery build",
-    "smithery:test": "node test-mcp-server.cjs"
+    "smithery:test": "node test-mcp-server.cjs",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
   },
   "keywords": [
     "quake",
@@ -68,7 +70,7 @@
     "server": {
       "command": "npx",
       "args": [
-        "@Ripnrip/quake-coding-arena-mcp"
+        "@ripnrip/quake-coding-arena-mcp"
       ],
       "env": {}
     },
@@ -100,11 +102,12 @@
     }
   },
   "files": [
-    "src/",
+    ".smithery/",
     "sounds/",
     "README.md",
-    "smithery.yaml",
-    "tsconfig.json",
     "package.json"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
