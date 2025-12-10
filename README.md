@@ -25,9 +25,11 @@
 - **Cross-platform audio** support
 
 ### 🔧 **MCP Integration**
-- **11 MCP Tools** for complete control
+- **10 MCP Tools** for complete control
 - **JSON-RPC 2.0** compliant
 - **Session statistics** tracking
+- **Dual transport support**: HTTP (Smithery) and stdio (local clients)
+- **Claude Code compatible** with automatic stdio detection
 - **Category filtering** for achievements
 - **Random achievement** selection
 - **AI usage guide** integration
@@ -211,8 +213,30 @@ quake-coding-arena-enhanced/
 }
 ```
 
-### Cursor
-Add to MCP settings or use Smithery integration.
+### Cursor / Claude Code
+- **Local Build Method** (Recommended):
+  ```json
+  {
+    "mcpServers": {
+      "quake-coding-arena": {
+        "command": "node",
+        "args": ["/path/to/.smithery/index.cjs"]
+      }
+    }
+  }
+  ```
+- **HTTP Endpoint Method** (When server is running):
+  ```json
+  {
+    "mcpServers": {
+      "quake-coding-arena": {
+        "transport": "http",
+        "url": "http://localhost:6487/mcp"
+      }
+    }
+  }
+  ```
+- See `CLAUDE-CODE-SETUP.md` and `CURSOR-HTTP-SETUP.md` for detailed instructions
 
 ### Chat Widget + Sound Bridge
 Clone-ready example that proxies ChatGPT responses and calls this MCP server to play Quake achievements. See [`examples/chat-widget`](examples/chat-widget/README.md) for setup instructions (OpenAI key + MCP URL required).
@@ -235,6 +259,18 @@ MIT License - Feel free to use and modify!
 *Published via Smithery - The MCP Server Registry*
 
 ## 📝 **Recent Updates**
+
+### **December 10, 2025 - JSON Parsing Fix & Transport Support**
+- **🔧 Fixed JSON parsing errors** when using with Claude Code and other stdio-based MCP clients
+- **📡 Added stdio transport support** with automatic detection for local MCP clients
+- **🚫 Fixed console.log interference** by redirecting all logs to stderr (prevents JSON-RPC protocol issues)
+- **✅ Tested and verified** sound playback functionality with both HTTP and stdio transports
+- **📚 Created comprehensive setup guides**:
+  - `CLAUDE-CODE-SETUP.md` - Complete Claude Code integration guide
+  - `CURSOR-HTTP-SETUP.md` - Cursor IDE HTTP endpoint setup
+  - `CURSOR-SETUP-COMPLETE.md` - Cursor MCP configuration guide
+- **🔌 Dual transport support**: Server now works with both HTTP (Smithery) and stdio (local clients)
+- **🎯 Port conflict handling** with automatic port selection and interactive prompts
 
 ### **December 10, 2025 - Female Audio Expansion Update**
 - **🎤 Added 16 female voice audio files** to the `sounds/female/` directory
