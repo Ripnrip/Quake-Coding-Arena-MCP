@@ -1,6 +1,6 @@
 # 🎯 Enhanced Quake Coding Arena - MCP Server
 
-[![smithery badge](https://smithery.ai/badge/@Ripnrip/quake-coding-arena)](https://smithery.ai/server/@Ripnrip/quake-coding-arena)
+[![Installations](https://smithery.ai/badge/@Ripnrip/quake-coding-arena-mcp)](https://smithery.ai/server/@Ripnrip/quake-coding-arena-mcp) [![smithery badge](https://smithery.ai/badge/@Ripnrip/quake-coding-arena)](https://smithery.ai/server/@Ripnrip/quake-coding-arena)
 
 ![Quake Coding Arena Logo](logo.png)
 
