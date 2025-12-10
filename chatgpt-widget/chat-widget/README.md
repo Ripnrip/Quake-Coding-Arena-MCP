@@ -54,18 +54,23 @@ docker run --env-file .env -p 4173:4173 quake-chat-widget
 ## Folder Structure
 ```
 chat-widget/
-├── public/                  # HTML/CSS/JS widget
-│   ├── index.html          # Full-page widget
-│   ├── widget.js           # Widget JavaScript
-│   └── styles.css          # Widget styles
-├── server/index.js         # Express server + OpenAI + MCP bridge
-├── widget.widget           # Standalone embeddable widget file
-├── chatkit-widget.html     # ChatKit-integrated version
-├── .env.example            # Starter env vars
-├── Dockerfile              # Optional container image
-├── README.md               # This file
-├── EMBED.md                # Embedding guide for widget.widget
-└── CHATKIT-INTEGRATION.md  # ChatKit integration guide
+├── public/                              # HTML/CSS/JS widget
+│   ├── index.html                      # Full-page widget
+│   ├── widget.js                       # Widget JavaScript
+│   └── styles.css                      # Widget styles
+├── server/index.js                     # Express server + OpenAI + MCP bridge
+├── widget.widget                       # Standalone embeddable widget file
+├── chatkit-widget.html                 # ChatKit-integrated version
+├── quake-achievements.widget.jsx      # ChatKit widget (JSX format) - Full
+├── quake-achievements-simple.widget.jsx # ChatKit widget (JSX format) - Simple
+├── quake-achievements.widget.json      # ChatKit widget (JSON format) - Full
+├── quake-achievements-simple.widget.json # ChatKit widget (JSON format) - Simple
+├── .env.example                        # Starter env vars
+├── Dockerfile                          # Optional container image
+├── README.md                           # This file
+├── EMBED.md                            # Embedding guide for widget.widget
+├── CHATKIT-INTEGRATION.md              # ChatKit integration guide
+└── WIDGET-UPLOAD-GUIDE.md              # Widget upload troubleshooting guide
 ```
 
 ## Widget Files
@@ -100,7 +105,19 @@ Complete Express-based application:
 ## Integration Options
 
 1. **Standalone Widget** - Use `widget.widget` for simple embedding
-2. **ChatKit Integration** - Use `chatkit-widget.html` for OpenAI ChatKit features
-3. **Full Application** - Use the complete Express app for maximum control
+2. **ChatKit Widget Builder** - Upload `quake-achievements.widget.jsx` to [widgets.chatkit.studio](https://widgets.chatkit.studio)
+3. **ChatKit Integration** - Use `chatkit-widget.html` for OpenAI ChatKit features
+4. **Full Application** - Use the complete Express app for maximum control
+
+## ChatKit Widget Builder
+
+To use with ChatKit Widget Builder:
+
+1. **Go to** [widgets.chatkit.studio](https://widgets.chatkit.studio)
+2. **Upload** `quake-achievements.widget.jsx` (or the simple version)
+3. **Configure** the `onClickAction` to call your MCP server endpoint
+4. **Test** the widget in the preview
+
+See [WIDGET-UPLOAD-GUIDE.md](./WIDGET-UPLOAD-GUIDE.md) for detailed instructions.
 
 Enjoy mixing AI replies with Quake-style hype! 🎧

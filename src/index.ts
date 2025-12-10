@@ -33,7 +33,7 @@ export const configSchema = z.object({
 }).optional();
 
 // 🎭 Create Server Function - Required by Smithery
-function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) {
+export function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) {
   // Apply configuration if provided
   if (config) {
     enhancedStats.volume = config.volume;
@@ -64,7 +64,8 @@ function createMcpServer({ config }: { config?: z.infer<typeof configSchema> }) 
   // Register prompts
   registerEncouragementPrompts(server.server);
 
-  return server.server; // Return the underlying Server
+  // Return both McpServer (for stdio) and underlying Server (for HTTP)
+  return { mcpServer: server, server: server.server };
 }
 
 // Create the stateless server wrapper

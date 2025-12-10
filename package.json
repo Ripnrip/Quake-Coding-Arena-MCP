@@ -10,8 +10,9 @@
   },
   "scripts": {
     "build": "npx smithery build",
-    "dev": "npx smithery dev",
-    "start": "npx smithery dev",
+    "dev": "SMITHERY_DEV=true tsx src/dev-server.ts",
+    "dev:smithery": "npx smithery dev",
+    "start": "SMITHERY_DEV=true tsx src/dev-server.ts",
     "test": "npx smithery dev",
     "smithery:dev": "npx smithery dev",
     "smithery:build": "npx smithery build",

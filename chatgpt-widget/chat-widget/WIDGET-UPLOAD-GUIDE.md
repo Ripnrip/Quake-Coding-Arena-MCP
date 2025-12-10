@@ -12,17 +12,22 @@ This means you're trying to upload an HTML file (like `widget.widget` or `chatki
 
 ## ✅ **Correct Files to Upload**
 
-Use one of these **JSON** files:
+Use one of these **JSX** files (ChatKit Widget Builder format):
 
-1. **`quake-achievements.widget.json`** - Full-featured widget with all controls
-2. **`quake-achievements-simple.widget.json`** - Minimal widget (recommended for first upload)
+1. **`quake-achievements.widget.jsx`** - Full-featured widget with all controls
+2. **`quake-achievements-simple.widget.jsx`** - Minimal widget (recommended for first upload)
+
+**Alternative JSON format** (if JSX doesn't work):
+- `quake-achievements.widget.json` - Full-featured JSON widget
+- `quake-achievements-simple.widget.json` - Simple JSON widget
 
 ## 📋 **Upload Steps**
 
 1. **Go to** [widgets.chatkit.studio](https://widgets.chatkit.studio)
 2. **Click** "New widget" or use the widget builder
-3. **Upload** the JSON file (`.json` extension)
-   - ✅ Use `quake-achievements.widget.json` or `quake-achievements-simple.widget.json`
+3. **Upload** the JSX file (`.jsx` extension) - **Recommended**
+   - ✅ Use `quake-achievements.widget.jsx` or `quake-achievements-simple.widget.jsx`
+   - ✅ Or use `quake-achievements.widget.json` or `quake-achievements-simple.widget.json` (JSON format)
    - ❌ Do NOT upload `widget.widget` (that's HTML)
    - ❌ Do NOT upload `chatkit-widget.html` (that's HTML)
 
@@ -32,28 +37,31 @@ Use one of these **JSON** files:
 |------|--------|---------|-------------------|
 | `widget.widget` | HTML | Standalone embeddable widget | ❌ No |
 | `chatkit-widget.html` | HTML | ChatKit-compatible HTML page | ❌ No |
-| `quake-achievements.widget.json` | JSON | Full ChatKit widget definition | ✅ Yes |
-| `quake-achievements-simple.widget.json` | JSON | Simple ChatKit widget | ✅ Yes (recommended) |
+| `quake-achievements.widget.jsx` | JSX | Full ChatKit widget (JSX format) | ✅ Yes (recommended) |
+| `quake-achievements-simple.widget.jsx` | JSX | Simple ChatKit widget (JSX format) | ✅ Yes |
+| `quake-achievements.widget.json` | JSON | Full ChatKit widget (JSON format) | ✅ Yes (alternative) |
+| `quake-achievements-simple.widget.json` | JSON | Simple ChatKit widget (JSON format) | ✅ Yes (alternative) |
 
 ## 🔧 **Troubleshooting**
 
 ### Error: "Unexpected token '<'"
 
-**Cause:** You uploaded an HTML file instead of JSON.
+**Cause:** You uploaded an HTML file instead of JSX/JSON.
 
 **Solution:** 
-1. Make sure you're uploading a `.json` file
-2. Check the file starts with `{` not `<!DOCTYPE`
-3. Use `quake-achievements-simple.widget.json` for a minimal test
+1. Make sure you're uploading a `.jsx` or `.json` file
+2. Check the file starts with `<Card` (JSX) or `{` (JSON), not `<!DOCTYPE`
+3. Use `quake-achievements-simple.widget.jsx` for a minimal test
 
 ### Error: "Invalid widget schema"
 
-**Cause:** The JSON structure doesn't match ChatKit's expected format.
+**Cause:** The JSX/JSON structure doesn't match ChatKit's expected format.
 
 **Solution:**
-1. Start with `quake-achievements-simple.widget.json` (minimal version)
-2. Verify the JSON is valid (use a JSON validator)
-3. Check ChatKit documentation for component names
+1. Start with `quake-achievements-simple.widget.jsx` (minimal JSX version)
+2. Verify the JSX syntax matches ChatKit's component format
+3. Check ChatKit documentation for component names and props
+4. If using JSON, verify the JSON is valid (use a JSON validator)
 
 ### Widget doesn't appear
 
@@ -85,11 +93,13 @@ The JSON widgets include:
 
 ## 💡 **Tips**
 
-- Start with the **simple** version to verify the format works
-- Then try the **full** version for all features
-- Customize the JSON to add/remove achievements
-- Use ChatKit's widget builder UI to modify the JSON visually
+- Start with the **simple JSX** version (`quake-achievements-simple.widget.jsx`) to verify the format works
+- Then try the **full JSX** version for all features
+- JSX format matches ChatKit's component syntax (like React)
+- Customize the JSX to add/remove achievements
+- Use ChatKit's widget builder UI to modify the widget visually
+- If JSX doesn't work, try the JSON versions as fallback
 
 ---
 
-**Remember:** Always upload `.json` files to ChatKit Widget Builder, not `.html` or `.widget` files! 🎯
+**Remember:** Always upload `.jsx` or `.json` files to ChatKit Widget Builder, not `.html` or `.widget` files! 🎯
