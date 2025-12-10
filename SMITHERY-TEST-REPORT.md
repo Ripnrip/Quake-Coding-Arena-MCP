@@ -75,7 +75,7 @@ All critical components have been tested and verified for Smithery deployment.
   "mcp": {
     "server": {
       "command": "npx",
-      "args": ["@smithery/quake-coding-arena-enhanced"]
+      "args": ["@Ripnrip/quake-coding-arena-mcp"]
     },
     "capabilities": {
       "tools": true,
@@ -120,7 +120,7 @@ All critical components have been tested and verified for Smithery deployment.
 2. **Test After Publishing:**
    ```bash
    # Install from Smithery
-   npx @smithery/quake-coding-arena-enhanced
+   npx @Ripnrip/quake-coding-arena-mcp
    ```
 
 3. **Verify in Client:**

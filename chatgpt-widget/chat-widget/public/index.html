@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quake Coding Arena Chat Widget</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="widget">
+      <header class="widget__header">
+        <div>
+          <h1>Quake Coding Arena</h1>
+          <p>ChatGPT replies + Quake announcements.</p>
+        </div>
+        <div class="widget__status" id="status">Ready</div>
+      </header>
+
+      <section class="chat-log" id="chat-log"></section>
+
+      <form class="chat-input" id="chat-form">
+        <input
+          id="message-input"
+          type="text"
+          placeholder="Ask something and press Enter"
+          autocomplete="off"
+          required
+        />
+        <button type="submit">Send</button>
+      </form>
+
+      <section class="sound-panel">
+        <h2>Instant Quake Achievements</h2>
+        <div class="sound-panel__controls">
+          <select id="sound-select">
+            <option value="">Select achievement…</option>
+            <option value="FIRST BLOOD">FIRST BLOOD</option>
+            <option value="HEADSHOT">HEADSHOT</option>
+            <option value="DOUBLE KILL">DOUBLE KILL</option>
+            <option value="TRIPLE KILL">TRIPLE KILL</option>
+            <option value="RAMPAGE">RAMPAGE</option>
+            <option value="DOMINATING">DOMINATING</option>
+            <option value="UNSTOPPABLE">UNSTOPPABLE</option>
+            <option value="GODLIKE">GODLIKE</option>
+            <option value="MONSTER KILL">MONSTER KILL</option>
+            <option value="WICKED SICK">WICKED SICK</option>
+            <option value="EXCELLENT">EXCELLENT</option>
+            <option value="PERFECT">PERFECT</option>
+            <option value="PLAY">PLAY</option>
+          </select>
+          <select id="voice-select">
+            <option value="">Auto voice</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+          <input id="volume-input" type="number" min="0" max="100" value="80" />
+          <button type="button" id="play-sound">Play</button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/widget.js"></script>
+  </body>
+</html>

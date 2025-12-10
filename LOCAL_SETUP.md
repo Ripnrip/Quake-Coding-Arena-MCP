@@ -79,7 +79,7 @@ Then update the URL in step 5 to match.
 
 ## Features
 
-✅ 11 unique Quake 3 Arena achievements
+✅ 15 unique Quake 3 Arena achievements
 ✅ Male & Female voice packs
 ✅ Session statistics tracking
 ✅ Volume control

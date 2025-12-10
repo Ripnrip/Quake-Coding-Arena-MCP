@@ -45,7 +45,26 @@ export class EnhancedSoundOracle {
             } else if (fs.existsSync(malePathMp3)) {
                 soundPath = malePathMp3;
             } else {
-                throw new Error(`❌ Sound file not found: ${baseName} (${achievement.file}) checked in ${projectRoot}`);
+                // Enhanced error message with debugging info
+                const checkedPaths = [
+                    soundPathWav,
+                    soundPathMp3,
+                    malePathWav,
+                    malePathMp3
+                ];
+                const cwd = process.cwd();
+                const dirname = typeof __dirname !== 'undefined' ? __dirname : 'undefined';
+                
+                throw new Error(
+                    `❌ Sound file not found: ${baseName} (${achievement.file})\n` +
+                    `   Project root: ${projectRoot}\n` +
+                    `   CWD: ${cwd}\n` +
+                    `   __dirname: ${dirname}\n` +
+                    `   Checked paths:\n` +
+                    checkedPaths.map(p => `     - ${p}`).join('\n') +
+                    `\n   Voice pack: ${selectedVoice} (${voiceConfig.path})\n` +
+                    `   Achievement: ${achievementName}`
+                );
             }
         }
 

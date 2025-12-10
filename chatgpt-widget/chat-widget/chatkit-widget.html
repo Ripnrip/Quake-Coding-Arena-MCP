@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quake Coding Arena - ChatKit Integration</title>
+  <style>
+    /* 🎭 The Quake ChatKit Theme Alchemist - Transform ChatKit into an epic arena experience */
+    :root {
+      --quake-primary: #7c3aed;
+      --quake-secondary: #a855f7;
+      --quake-bg: #07040f;
+      --quake-surface: rgba(7, 6, 18, 0.9);
+      --quake-border: rgba(114, 85, 255, 0.4);
+      --quake-text: #f8fafc;
+      font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #2f1f71, #07040f 60%);
+      color: var(--quake-text);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 20px;
+      height: calc(100vh - 40px);
+    }
+
+    /* ChatKit Container Styling */
+    #chatkit-container {
+      background: var(--quake-surface);
+      border: 1px solid var(--quake-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Quake Controls Panel */
+    .quake-panel {
+      background: var(--quake-surface);
+      border: 1px solid var(--quake-border);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .quake-panel h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--quake-primary), var(--quake-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .quake-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quake-controls select,
+    .quake-controls input {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 10, 22, 0.9);
+      color: var(--quake-text);
+      font-size: 1rem;
+    }
+
+    .quake-controls button {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .quake-controls button:hover {
+      transform: scale(1.05);
+    }
+
+    .quake-controls button:active {
+      transform: scale(0.98);
+    }
+
+    .achievement-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .achievement-item {
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(18, 18, 36, 0.7);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .achievement-item:hover {
+      background: rgba(124, 58, 237, 0.2);
+    }
+
+    .achievement-item.active {
+      background: linear-gradient(135deg, var(--quake-primary), var(--quake-secondary));
+    }
+
+    .status {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 968px) {
+      .container {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      
+      .quake-panel {
+        order: -1;
+      }
+    }
+
+    /* Override ChatKit styles to match Quake theme */
+    :global(.chatkit-message) {
+      background: rgba(63, 63, 70, 0.6) !important;
+      border-radius: 14px !important;
+    }
+
+    :global(.chatkit-input) {
+      background: rgba(15, 15, 29, 0.8) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ChatKit Widget Container -->
+    <div id="chatkit-container">
+      <div style="text-align: center; padding: 40px;">
+        <h1 style="margin-bottom: 12px;">🎮 Quake Coding Arena</h1>
+        <p style="opacity: 0.8;">Loading ChatKit...</p>
+      </div>
+    </div>
+
+    <!-- Quake Achievement Controls -->
+    <aside class="quake-panel">
+      <h2>⚔️ Quake Achievements</h2>
+      
+      <div class="quake-controls">
+        <label>Select Achievement:</label>
+        <select id="achievement-select">
+          <option value="">Choose an achievement...</option>
+          <option value="FIRST BLOOD">FIRST BLOOD</option>
+          <option value="HEADSHOT">HEADSHOT</option>
+          <option value="DOUBLE KILL">DOUBLE KILL</option>
+          <option value="TRIPLE KILL">TRIPLE KILL</option>
+          <option value="MULTI KILL">MULTI KILL</option>
+          <option value="KILLING SPREE">KILLING SPREE</option>
+          <option value="RAMPAGE">RAMPAGE</option>
+          <option value="DOMINATING">DOMINATING</option>
+          <option value="UNSTOPPABLE">UNSTOPPABLE</option>
+          <option value="GODLIKE">GODLIKE</option>
+          <option value="MONSTER KILL">MONSTER KILL</option>
+          <option value="LUDICROUS KILL">LUDICROUS KILL</option>
+          <option value="WICKED SICK">WICKED SICK</option>
+          <option value="EXCELLENT">EXCELLENT</option>
+          <option value="PERFECT">PERFECT</option>
+          <option value="IMPRESSIVE">IMPRESSIVE</option>
+          <option value="HOLY SHIT">HOLY SHIT</option>
+          <option value="HUMILIATION">HUMILIATION</option>
+          <option value="PREPARE TO FIGHT">PREPARE TO FIGHT</option>
+          <option value="PLAY">PLAY</option>
+        </select>
+
+        <label>Voice Pack:</label>
+        <select id="voice-select">
+          <option value="">Auto</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+
+        <label>Volume (0-100):</label>
+        <input type="number" id="volume-input" min="0" max="100" value="80" />
+
+        <button id="play-button" onclick="triggerQuakeSound()">
+          🎯 Play Achievement
+        </button>
+      </div>
+
+      <div class="status" id="status">Ready</div>
+
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: 1.1rem;">Quick Select:</h3>
+        <div class="achievement-list" id="quick-achievements"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // 🎭 The Widget Configuration Alchemist - Extract settings from URL or use defaults
+    const config = (() => {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        apiUrl: params.get('apiUrl') || window.location.origin,
+        quakeEndpoint: params.get('quakeEndpoint') || '/quake-sound',
+        chatkitWorkflowId: params.get('workflowId') || null,
+        chatkitClientToken: params.get('clientToken') || null,
+      };
+    })();
+
+    // 🌟 Quick achievement buttons
+    const quickAchievements = [
+      'FIRST BLOOD', 'HEADSHOT', 'RAMPAGE', 'GODLIKE', 
+      'WICKED SICK', 'PERFECT', 'EXCELLENT'
+    ];
+
+    const quickAchievementsEl = document.getElementById('quick-achievements');
+    quickAchievements.forEach(achievement => {
+      const item = document.createElement('div');
+      item.className = 'achievement-item';
+      item.textContent = achievement;
+      item.onclick = () => {
+        document.getElementById('achievement-select').value = achievement;
+        triggerQuakeSound(achievement);
+      };
+      quickAchievementsEl.appendChild(item);
+    });
+
+    // 🎯 The Achievement Trigger Virtuoso - Play Quake sounds via MCP server
+    async function triggerQuakeSound(achievementOverride = null) {
+      const achievement = achievementOverride || document.getElementById('achievement-select').value;
+      const voiceGender = document.getElementById('voice-select').value || undefined;
+      const volume = document.getElementById('volume-input').value || 80;
+
+      if (!achievement) {
+        setStatus('⚠️ Please select an achievement first');
+        return;
+      }
+
+      setStatus(`🎮 Playing ${achievement}...`);
+
+      try {
+        const params = new URLSearchParams({ achievement });
+        if (voiceGender) params.set('voiceGender', voiceGender);
+        if (volume) params.set('volume', volume);
+
+        const response = await fetch(`${config.apiUrl}${config.quakeEndpoint}?${params.toString()}`);
+        
+        if (!response.ok) {
+          const error = await response.json().catch(() => ({}));
+          throw new Error(error.error || 'Failed to trigger sound');
+        }
+
+        setStatus(`✨ ${achievement} played successfully!`);
+        
+        // Visual feedback
+        const item = Array.from(quickAchievementsEl.children).find(
+          el => el.textContent === achievement
+        );
+        if (item) {
+          item.classList.add('active');
+          setTimeout(() => item.classList.remove('active'), 1000);
+        }
+      } catch (error) {
+        console.error('Failed to trigger Quake sound:', error);
+        setStatus(`❌ Error: ${error.message}`);
+      }
+    }
+
+    function setStatus(text) {
+      document.getElementById('status').textContent = text;
+    }
+
+    // 🎭 The ChatKit Initialization Maestro - Set up ChatKit with Quake integration
+    async function initializeChatKit() {
+      if (!config.chatkitWorkflowId || !config.chatkitClientToken) {
+        document.getElementById('chatkit-container').innerHTML = `
+          <div style="text-align: center; padding: 40px;">
+            <h2>ChatKit Configuration Required</h2>
+            <p>Add workflowId and clientToken as URL parameters:</p>
+            <code style="display: block; margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+              ?workflowId=your-workflow-id&clientToken=your-client-token
+            </code>
+            <p style="margin-top: 20px; opacity: 0.8;">
+              Or use the standalone widget.widget for direct MCP integration.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        // Initialize ChatKit (replace with actual ChatKit SDK initialization)
+        // This is a placeholder - use the actual ChatKit SDK when available
+        const chatkit = window.ChatKit?.init?.({
+          container: '#chatkit-container',
+          workflowId: config.chatkitWorkflowId,
+          clientToken: config.chatkitClientToken,
+          theme: {
+            primaryColor: '#7c3aed',
+            backgroundColor: '#07040f',
+            textColor: '#f8fafc',
+            borderRadius: '18px',
+            fontFamily: "'Space Grotesk', sans-serif"
+          },
+          onToolCall: async (toolName, args) => {
+            if (toolName === 'play_enhanced_quake_sound') {
+              await triggerQuakeSound(args.achievement);
+            }
+          }
+        });
+
+        setStatus('✅ ChatKit connected');
+      } catch (error) {
+        console.error('Failed to initialize ChatKit:', error);
+        document.getElementById('chatkit-container').innerHTML = `
+          <div style="text-align: center; padding: 40px; color: #ef4444;">
+            <h2>ChatKit Initialization Failed</h2>
+            <p>${error.message}</p>
+            <p style="margin-top: 20px; opacity: 0.8;">
+              Make sure ChatKit SDK is loaded and credentials are correct.
+            </p>
+          </div>
+        `;
+      }
+    }
+
+    // 🚀 Initialize on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeChatKit);
+    } else {
+      initializeChatKit();
+    }
+
+    // Export for global access
+    window.triggerQuakeSound = triggerQuakeSound;
+  </script>
+
+  <!-- ChatKit SDK (load from CDN when available) -->
+  <!-- <script src="https://cdn.openai.com/chatkit/v1/chatkit.js"></script> -->
+  
+  <!-- Fallback: Use standalone widget if ChatKit not available -->
+  <script>
+    // If ChatKit SDK not loaded, show fallback message
+    if (!window.ChatKit && !config.chatkitWorkflowId) {
+      // Widget can still work with manual Quake controls
+      setStatus('🎮 Quake controls ready (ChatKit optional)');
+    }
+  </script>
+</body>
+</html>

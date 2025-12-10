@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quake Coding Arena Chat Widget</title>
+  <style>
+    :root {
+      font-family: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1e1b4b, #08070f 55%);
+      color: #f8fafc;
+      min-height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 16px;
+      background: radial-gradient(circle at top, #2f1f71, #07040f 60%);
+    }
+
+    .widget {
+      width: min(960px, 100%);
+      background: rgba(7, 6, 18, 0.9);
+      border: 1px solid rgba(114, 85, 255, 0.4);
+      border-radius: 18px;
+      padding: 24px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .widget__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .widget__header h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      letter-spacing: 1px;
+    }
+
+    .widget__status {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      font-size: 0.9rem;
+    }
+
+    .chat-log {
+      min-height: 420px;
+      max-height: 55vh;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(12, 11, 27, 0.8);
+    }
+
+    .chat-bubble {
+      padding: 12px 16px;
+      border-radius: 14px;
+      max-width: 80%;
+      line-height: 1.4;
+      animation: slide-in 0.2s ease;
+    }
+
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-bubble.bot {
+      align-self: flex-start;
+      background: rgba(63, 63, 70, 0.6);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-bubble small {
+      display: block;
+      opacity: 0.7;
+      font-size: 0.75rem;
+      margin-bottom: 4px;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 15, 29, 0.8);
+      color: inherit;
+      font-size: 1rem;
+    }
+
+    .chat-input button {
+      padding: 0 28px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .sound-panel {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(18, 18, 36, 0.7);
+    }
+
+    .sound-panel h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .sound-panel__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sound-panel select,
+    .sound-panel input {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 10, 22, 0.9);
+      color: inherit;
+    }
+
+    .sound-panel button {
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    @keyframes slide-in {
+      from {
+        transform: translateY(8px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 24px 12px;
+      }
+      .chat-bubble {
+        max-width: 100%;
+      }
+      .sound-panel__controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="widget">
+    <header class="widget__header">
+      <div>
+        <h1>Quake Coding Arena</h1>
+        <p>ChatGPT replies + Quake announcements.</p>
+      </div>
+      <div class="widget__status" id="status">Ready</div>
+    </header>
+
+    <section class="chat-log" id="chat-log"></section>
+
+    <form class="chat-input" id="chat-form">
+      <input
+        id="message-input"
+        type="text"
+        placeholder="Ask something and press Enter"
+        autocomplete="off"
+        required
+      />
+      <button type="submit">Send</button>
+    </form>
+
+    <section class="sound-panel">
+      <h2>Instant Quake Achievements</h2>
+      <div class="sound-panel__controls">
+        <select id="sound-select">
+          <option value="">Select achievement…</option>
+          <option value="FIRST BLOOD">FIRST BLOOD</option>
+          <option value="HEADSHOT">HEADSHOT</option>
+          <option value="DOUBLE KILL">DOUBLE KILL</option>
+          <option value="TRIPLE KILL">TRIPLE KILL</option>
+          <option value="RAMPAGE">RAMPAGE</option>
+          <option value="DOMINATING">DOMINATING</option>
+          <option value="UNSTOPPABLE">UNSTOPPABLE</option>
+          <option value="GODLIKE">GODLIKE</option>
+          <option value="MONSTER KILL">MONSTER KILL</option>
+          <option value="WICKED SICK">WICKED SICK</option>
+          <option value="EXCELLENT">EXCELLENT</option>
+          <option value="PERFECT">PERFECT</option>
+          <option value="PLAY">PLAY</option>
+        </select>
+        <select id="voice-select">
+          <option value="">Auto voice</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
+        <input id="volume-input" type="number" min="0" max="100" value="80" />
+        <button type="button" id="play-sound">Play</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 🎭 The Widget Configuration Alchemist - Extract settings from URL or use defaults
+    const config = (() => {
+      const params = new URLSearchParams(window.location.search);
+      const scriptTag = document.querySelector('script[data-api-url]');
+      return {
+        apiUrl: scriptTag?.dataset.apiUrl || params.get('apiUrl') || window.location.origin,
+        chatEndpoint: scriptTag?.dataset.chatEndpoint || params.get('chatEndpoint') || '/chat',
+        quakeEndpoint: scriptTag?.dataset.quakeEndpoint || params.get('quakeEndpoint') || '/quake-sound',
+      };
+    })();
+
+    const chatLog = document.getElementById("chat-log");
+    const statusEl = document.getElementById("status");
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("message-input");
+    const soundSelect = document.getElementById("sound-select");
+    const voiceSelect = document.getElementById("voice-select");
+    const volumeInput = document.getElementById("volume-input");
+    const playButton = document.getElementById("play-sound");
+
+    appendMessage("System", "Widget ready. Ask something epic! 🎮", "bot");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+      await sendMessage(text);
+    });
+
+    playButton.addEventListener("click", async () => {
+      const achievement = soundSelect.value;
+      if (!achievement) {
+        setStatus("Pick an achievement first.");
+        return;
+      }
+      setStatus(`Playing ${achievement}…`);
+      try {
+        await triggerSound({
+          achievement,
+          voiceGender: voiceSelect.value || undefined,
+          volume: volumeInput.value,
+        });
+        setStatus(`${achievement} triggered.`);
+      } catch (error) {
+        console.error(error);
+        setStatus(error.message || "Failed to trigger sound");
+        appendMessage("System", `⚠️ ${error.message || "Failed to trigger sound."}`, "bot");
+      }
+    });
+
+    async function sendMessage(text) {
+      appendMessage("You", text, "user");
+      setStatus("Thinking…");
+      try {
+        const response = await fetch(`${config.apiUrl}${config.chatEndpoint}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text }),
+        });
+
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload.error || "Chat endpoint failed");
+        }
+
+        appendMessage("AI", payload.reply, "bot");
+
+        if (payload.quakeSound) {
+          setStatus(`Triggering ${payload.quakeSound}…`);
+          try {
+            await triggerSound({ achievement: payload.quakeSound });
+            setStatus(`${payload.quakeSound} played!`);
+          } catch (soundError) {
+            console.error(soundError);
+            setStatus("Chat ok, but failed to play sound.");
+            appendMessage(
+              "System",
+              `⚠️ Unable to play ${payload.quakeSound}: ${soundError.message}`,
+              "bot"
+            );
+          }
+        } else {
+          setStatus("Reply delivered.");
+        }
+      } catch (error) {
+        console.error(error);
+        setStatus(error.message || "Something went wrong");
+        appendMessage("System", `⚠️ ${error.message || "ChatGPT request failed."}`, "bot");
+      }
+    }
+
+    async function triggerSound({ achievement, voiceGender, volume }) {
+      const params = new URLSearchParams({ achievement });
+      if (voiceGender) params.set("voiceGender", voiceGender);
+      if (volume) params.set("volume", volume);
+
+      const response = await fetch(`${config.apiUrl}${config.quakeEndpoint}?${params.toString()}`);
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.error || "Sound endpoint failed");
+      }
+    }
+
+    function appendMessage(author, text, variant) {
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${variant}`;
+
+      const label = document.createElement("small");
+      label.textContent = author;
+      bubble.appendChild(label);
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      bubble.appendChild(paragraph);
+
+      chatLog.appendChild(bubble);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+  </script>
+</body>
+</html>

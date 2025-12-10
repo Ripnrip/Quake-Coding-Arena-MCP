@@ -1,0 +1,387 @@
+{
+  "type": "Card",
+  "size": "lg",
+  "padding": 24,
+  "background": {
+    "light": "#f8fafc",
+    "dark": "rgba(7, 6, 18, 0.9)"
+  },
+  "status": {
+    "text": "Quake Coding Arena",
+    "icon": "🎮"
+  },
+  "theme": "dark",
+  "children": [
+    {
+      "type": "Box",
+      "direction": "column",
+      "spacing": 20,
+      "children": [
+        {
+          "type": "Text",
+          "text": "⚔️ Quake Achievement Player",
+          "variant": "heading",
+          "size": "lg"
+        },
+        {
+          "type": "Text",
+          "text": "Celebrate coding victories with authentic Quake 3 Arena sounds",
+          "variant": "body",
+          "color": "secondary"
+        },
+        {
+          "type": "Divider"
+        },
+        {
+          "type": "Box",
+          "direction": "column",
+          "spacing": 12,
+          "children": [
+            {
+              "type": "Text",
+              "text": "Select Achievement",
+              "variant": "label",
+              "size": "sm"
+            },
+            {
+              "type": "Select",
+              "key": "achievement-select",
+              "placeholder": "Choose an achievement...",
+              "options": [
+                {
+                  "label": "FIRST BLOOD",
+                  "value": "FIRST BLOOD",
+                  "description": "First bug found, first test passed"
+                },
+                {
+                  "label": "HEADSHOT",
+                  "value": "HEADSHOT",
+                  "description": "Quick bug fix, precision strike"
+                },
+                {
+                  "label": "DOUBLE KILL",
+                  "value": "DOUBLE KILL",
+                  "description": "Two quick wins"
+                },
+                {
+                  "label": "TRIPLE KILL",
+                  "value": "TRIPLE KILL",
+                  "description": "Triple efficiency"
+                },
+                {
+                  "label": "MULTI KILL",
+                  "value": "MULTI KILL",
+                  "description": "Multiple bugs fixed quickly"
+                },
+                {
+                  "label": "KILLING SPREE",
+                  "value": "KILLING SPREE",
+                  "description": "Consistent productivity"
+                },
+                {
+                  "label": "RAMPAGE",
+                  "value": "RAMPAGE",
+                  "description": "Multiple quick tasks completed"
+                },
+                {
+                  "label": "DOMINATING",
+                  "value": "DOMINATING",
+                  "description": "Complex problems solved"
+                },
+                {
+                  "label": "UNSTOPPABLE",
+                  "value": "UNSTOPPABLE",
+                  "description": "Long productive session"
+                },
+                {
+                  "label": "GODLIKE",
+                  "value": "GODLIKE",
+                  "description": "Legendary coding session"
+                },
+                {
+                  "label": "ULTRA KILL",
+                  "value": "ULTRA KILL",
+                  "description": "Exceptional performance"
+                },
+                {
+                  "label": "MONSTER KILL",
+                  "value": "MONSTER KILL",
+                  "description": "Massive refactoring"
+                },
+                {
+                  "label": "LUDICROUS KILL",
+                  "value": "LUDICROUS KILL",
+                  "description": "Unbelievable solutions"
+                },
+                {
+                  "label": "WICKED SICK",
+                  "value": "WICKED SICK",
+                  "description": "Mind-blowing solution"
+                },
+                {
+                  "label": "EXCELLENT",
+                  "value": "EXCELLENT",
+                  "description": "Elegant solutions"
+                },
+                {
+                  "label": "PERFECT",
+                  "value": "PERFECT",
+                  "description": "Flawless implementation"
+                },
+                {
+                  "label": "IMPRESSIVE",
+                  "value": "IMPRESSIVE",
+                  "description": "Creative problem-solving"
+                },
+                {
+                  "label": "HOLY SHIT",
+                  "value": "HOLY SHIT",
+                  "description": "Unexpected breakthrough"
+                },
+                {
+                  "label": "HUMILIATION",
+                  "value": "HUMILIATION",
+                  "description": "Quick bug fix"
+                },
+                {
+                  "label": "BOTTOM FEEDER",
+                  "value": "BOTTOM FEEDER",
+                  "description": "Learning from mistakes"
+                },
+                {
+                  "label": "PREPARE TO FIGHT",
+                  "value": "PREPARE TO FIGHT",
+                  "description": "Before deployment"
+                },
+                {
+                  "label": "PLAY",
+                  "value": "PLAY",
+                  "description": "Game on, let's code!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Box",
+          "direction": "row",
+          "spacing": 12,
+          "children": [
+            {
+              "type": "Box",
+              "direction": "column",
+              "spacing": 8,
+              "flex": 1,
+              "children": [
+                {
+                  "type": "Text",
+                  "text": "Voice Pack",
+                  "variant": "label",
+                  "size": "sm"
+                },
+                {
+                  "type": "Select",
+                  "key": "voice-select",
+                  "placeholder": "Auto",
+                  "options": [
+                    {
+                      "label": "Auto",
+                      "value": ""
+                    },
+                    {
+                      "label": "Male",
+                      "value": "male"
+                    },
+                    {
+                      "label": "Female",
+                      "value": "female"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "Box",
+              "direction": "column",
+              "spacing": 8,
+              "flex": 1,
+              "children": [
+                {
+                  "type": "Text",
+                  "text": "Volume (0-100)",
+                  "variant": "label",
+                  "size": "sm"
+                },
+                {
+                  "type": "Input",
+                  "key": "volume-input",
+                  "type": "number",
+                  "placeholder": "80",
+                  "defaultValue": "80",
+                  "min": 0,
+                  "max": 100
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Button",
+          "key": "play-button",
+          "label": "🎯 Play Achievement",
+          "variant": "primary",
+          "size": "lg",
+          "onClick": {
+            "action": "play_quake_achievement",
+            "params": {
+              "achievement": "{{achievement-select.value}}",
+              "voiceGender": "{{voice-select.value}}",
+              "volume": "{{volume-input.value}}"
+            }
+          }
+        },
+        {
+          "type": "Divider"
+        },
+        {
+          "type": "Box",
+          "direction": "column",
+          "spacing": 12,
+          "children": [
+            {
+              "type": "Text",
+              "text": "Quick Select",
+              "variant": "heading",
+              "size": "md"
+            },
+            {
+              "type": "Box",
+              "direction": "row",
+              "spacing": 8,
+              "wrap": true,
+              "children": [
+                {
+                  "type": "Badge",
+                  "label": "FIRST BLOOD",
+                  "color": "danger",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "FIRST BLOOD"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "HEADSHOT",
+                  "color": "success",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "HEADSHOT"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "RAMPAGE",
+                  "color": "warning",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "RAMPAGE"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "GODLIKE",
+                  "color": "discovery",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "GODLIKE"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "WICKED SICK",
+                  "color": "info",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "WICKED SICK"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "PERFECT",
+                  "color": "success",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "PERFECT"
+                    }
+                  }
+                },
+                {
+                  "type": "Badge",
+                  "label": "EXCELLENT",
+                  "color": "success",
+                  "variant": "soft",
+                  "pill": true,
+                  "onClick": {
+                    "action": "play_quake_achievement",
+                    "params": {
+                      "achievement": "EXCELLENT"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Box",
+          "direction": "column",
+          "spacing": 8,
+          "padding": 12,
+          "background": {
+            "light": "#f1f5f9",
+            "dark": "rgba(18, 18, 36, 0.7)"
+          },
+          "borderRadius": 12,
+          "children": [
+            {
+              "type": "Text",
+              "text": "Status",
+              "variant": "label",
+              "size": "sm"
+            },
+            {
+              "type": "Text",
+              "key": "status-text",
+              "text": "Ready to play achievements",
+              "variant": "body",
+              "color": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

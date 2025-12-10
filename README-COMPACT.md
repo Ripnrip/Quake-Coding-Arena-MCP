@@ -2,7 +2,7 @@
 
 ![Quake Coding Arena Logo](logo.png)
 
-**11 authentic Quake sounds + Authentic Male/Female voice packs (WAV/MP3) for Claude Desktop & Cursor IDE** ✨
+**15 authentic Quake sounds + Authentic Male/Female voice packs (WAV/MP3) for Claude Desktop & Cursor IDE** ✨
 
 ---
 
@@ -35,7 +35,7 @@ Settings → MCP → Add Server:
 
 ---
 
-## 🎮 **ACHIEVEMENTS (11 total)**
+## 🎮 **ACHIEVEMENTS (15 total)**
 
 ### **🔥 Streaks**
 - **RAMPAGE** (10) - Multiple quick tasks
@@ -174,7 +174,7 @@ node test-mcp-server.js  # Validate communication
 
 ## 📊 **FEATURES**
 
-- **11 authentic Quake sounds**
+- **15 authentic Quake sounds**
 - **Authentic male/female voice packs** (male MP3, female WAV format)
 - **Cross-platform support** (macOS, Windows, Linux)
 - **Statistics tracking** with persistence

@@ -81,8 +81,8 @@ setTimeout(() => {
         console.log('✅ MCP Protocol working correctly!');
       }
 
-      if (serverError.includes('11 achievements')) {
-        console.log('✅ Server loaded 11 achievements!');
+      if (serverError.includes('15 achievements')) {
+        console.log('✅ Server loaded 15 achievements!');
       }
 
       console.log('\n🎯 Enhanced Quake Arena MCP Server is READY for Cursor!');

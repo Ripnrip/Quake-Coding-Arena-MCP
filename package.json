@@ -67,7 +67,7 @@
     "server": {
       "command": "npx",
       "args": [
-        "@smithery/quake-coding-arena-enhanced"
+        "@Ripnrip/quake-coding-arena-mcp"
       ],
       "env": {}
     },

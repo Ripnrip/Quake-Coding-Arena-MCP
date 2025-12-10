@@ -13,7 +13,7 @@ Your Enhanced Quake Coding Arena MCP server is fully prepared for Smithery publi
 ### **Complete Package Structure:**
 ```
 quake-coding-arena-enhanced/
-├── index.js              # ✅ Main MCP server (11 achievements, dual voices)
+├── index.js              # ✅ Main MCP server (15 achievements, dual voices)
 ├── package.json           # ✅ Full Smithery metadata and configuration
 ├── smithery.yaml         # ✅ Smithery configuration file
 ├── README.md            # ✅ Professional documentation
@@ -26,7 +26,7 @@ quake-coding-arena-enhanced/
 
 ### **Test Results - ALL PASSING:**
 - ✅ **MCP Protocol**: Fully compliant with JSON-RPC 2.0
-- ✅ **11 Achievements**: All working with male/female voices
+- ✅ **15 Achievements**: All working with male/female voices
 - ✅ **10 MCP Tools**: Complete functionality tested
 - ✅ **Voice Switching**: Seamless male/female transitions
 - ✅ **Volume Control**: 0-100% range functional
@@ -74,7 +74,7 @@ Subject: "MCP Server Submission: Enhanced Quake Coding Arena"
 - **Author**: Quake Coding Arena Team
 
 ### **Key Features for Listing:**
-- 🎯 **11 Authentic Quake 3 Arena Achievements**
+- 🎯 **15 Authentic Quake 3 Arena Achievements**
 - 🎤 **Dual Voice System** (Male + Female announcer)
 - 🔊 **Volume Control** (0-100%)
 - 📊 **Session Statistics & Tracking**
@@ -109,7 +109,7 @@ Enhanced Quake Coding Arena - Gamify Your Development!
 ### **Description:**
 🎯 **Transform your coding environment into an epic Quake 3 Arena!**
 
-Experience the thrill of 11 authentic Quake achievements with dual voice announcers (male/female), perfect volume control, and comprehensive session tracking. Every bug fix, feature completion, and coding milestone becomes legendary!
+Experience the thrill of 15 authentic Quake achievements with dual voice announcers (male/female), perfect volume control, and comprehensive session tracking. Every bug fix, feature completion, and coding milestone becomes legendary!
 
 **Perfect for developers who want:**
 - ⚡ Motivational feedback during coding sessions
@@ -119,7 +119,7 @@ Experience the thrill of 11 authentic Quake achievements with dual voice announc
 - 🔧 Complete MCP integration for Claude Desktop, Cursor, and more
 
 **Features:**
-- 11 authentic Quake achievements (GODLIKE, EXCELLENT, UNSTOPPABLE, etc.)
+- 15 authentic Quake achievements (GODLIKE, EXCELLENT, UNSTOPPABLE, etc.)
 - Dual voice system with male/female announcer options
 - 10 MCP tools for complete control
 - Session statistics and achievement tracking
@@ -140,7 +140,7 @@ Experience the thrill of 11 authentic Quake achievements with dual voice announc
 
 ### **File Size:**
 - **Server**: ~15KB
-- **Sounds**: ~285KB total (11 MP3 files)
+- **Sounds**: ~285KB total (15 MP3 files)
 - **Total Package**: ~300KB
 
 ### **Performance:**
@@ -155,7 +155,7 @@ Experience the thrill of 11 authentic Quake achievements with dual voice announc
 
 1. **Unique Niche**: Only Quake-themed MCP server
 2. **High Quality**: Professional implementation with dual voices
-3. **Complete Solution**: 11 achievements vs competitors with 1-2 sounds
+3. **Complete Solution**: 15 achievements vs competitors with 1-2 sounds
 4. **Developer Appeal**: Perfect for developer productivity and motivation
 5. **Cross-Platform**: Works on all major operating systems
 6. **Easy Integration**: Simple one-command installation
@@ -165,7 +165,7 @@ Experience the thrill of 11 authentic Quake achievements with dual voice announc
 ## ✅ **Final Checklist:**
 
 - [x] MCP server fully functional
-- [x] All 11 achievements tested
+- [x] All 15 achievements tested
 - [x] Dual voice system working
 - [x] Package.json complete
 - [x] Smithery.yaml configured

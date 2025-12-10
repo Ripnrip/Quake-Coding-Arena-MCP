@@ -61,7 +61,7 @@ smithery install quake-coding-arena-enhanced
   "mcpServers": {
     "quake-arena": {
       "command": "npx",
-      "args": ["@smithery/quake-coding-arena-enhanced"]
+      "args": ["@Ripnrip/quake-coding-arena-mcp"]
     }
   }
 }
@@ -205,7 +205,7 @@ quake-coding-arena-enhanced/
   "mcpServers": {
     "quake-arena": {
       "command": "npx",
-      "args": ["@smithery/quake-coding-arena-enhanced"]
+      "args": ["@Ripnrip/quake-coding-arena-mcp"]
     }
   }
 }
@@ -213,6 +213,9 @@ quake-coding-arena-enhanced/
 
 ### Cursor
 Add to MCP settings or use Smithery integration.
+
+### Chat Widget + Sound Bridge
+Clone-ready example that proxies ChatGPT responses and calls this MCP server to play Quake achievements. See [`examples/chat-widget`](examples/chat-widget/README.md) for setup instructions (OpenAI key + MCP URL required).
 
 ## 📜 **License**
 

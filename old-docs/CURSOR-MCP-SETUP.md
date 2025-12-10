@@ -1,6 +1,6 @@
 # 🎯 Enhanced Quake Arena - Cursor MCP Integration
 
-**Add 11 authentic Quake achievement sounds to Cursor IDE via MCP!**
+**Add 15 authentic Quake achievement sounds to Cursor IDE via MCP!**
 
 ---
 
@@ -19,7 +19,7 @@ Click **"Add Server"** and configure:
   "name": "enhanced-quake-coding-arena",
   "command": "node",
   "args": ["/Users/admin/Developer/AI-IDE-Configs/quake-coding-arena/claude-desktop-enhanced/index.js"],
-  "description": "🎯 Enhanced Quake Coding Arena with 11 authentic achievement sounds"
+  "description": "🎯 Enhanced Quake Coding Arena with 15 authentic achievement sounds"
 }
 ```
 
@@ -161,7 +161,7 @@ If Cursor doesn't support MCP directly:
 ## 🎮 **CURSOR CODING ARENA EXPERIENCE**
 
 Once configured, you'll have:
-- **11 authentic Quake sounds** in your coding environment
+- **15 authentic Quake sounds** in your coding environment
 - **Real-time achievement triggers** during coding sessions
 - **Comprehensive statistics** tracking your coding victories
 - **Volume control** for the perfect coding atmosphere

@@ -22,7 +22,7 @@ This guide helps AI agents understand how to use the Enhanced Quake Coding Arena
   "mcpServers": {
     "quake-arena": {
       "command": "npx",
-      "args": ["@smithery/quake-coding-arena-enhanced"]
+      "args": ["@Ripnrip/quake-coding-arena-mcp"]
     }
   }
 }
